@@ -12,6 +12,7 @@
 
 import { useEffect, useState } from 'react';
 import { ThreeFloorPlan } from '@/components/ThreeFloorPlan';
+import { usePersonaController } from '@/hooks/usePersonaController';
 import { loadMapLayout } from '@/parser/loadMapLayout';
 import type { MapLayout } from '@/parser/types';
 import { MAP_CATALOGUE, getCatalogueEntry, type MapCatalogueEntry } from '@/data/maps';
@@ -33,7 +34,6 @@ export function MapViewer() {
   });
   const [state, setState] = useState<LoadingState>({ kind: 'idle' });
   const [showZoneLabels, setShowZoneLabels] = useState(true);
-  const [showSpawnOverlay, setShowSpawnOverlay] = useState(false);
   // On narrow viewports the sidebar is hidden by default and toggled
   // open via a hamburger button in the header. On wide viewports the
   // sidebar is always visible and this flag is a no-op.
@@ -68,6 +68,13 @@ export function MapViewer() {
   }, [selected]);
 
   const closeSidebarOnMobile = () => setIsSidebarOpen(false);
+
+  // const { personas } = usePersonaController({
+  //   simCode: state.kind === 'ready' ? state.layout.mapId : undefined,
+  //   startStep: 0,
+  //   tileSize: state.kind === 'ready' ? (state.layout.tileWidth ?? 1) : 1,
+  //   pollMs: 300
+  // });
 
   return (
     <div
@@ -137,15 +144,7 @@ export function MapViewer() {
             />
             Show zone labels
           </label>
-          <label className="toggle">
-            <input
-              type="checkbox"
-              checked={showSpawnOverlay}
-              onChange={(e) => setShowSpawnOverlay(e.target.checked)}
-              data-testid="toggle-spawn-overlay"
-            />
-            Show spawning slots
-          </label>
+
 
           {state.kind === 'ready' ? (
             <ParserStats layout={state.layout} />
@@ -169,7 +168,7 @@ export function MapViewer() {
               key={state.layout.mapId}
               layout={state.layout}
               showZoneLabels={showZoneLabels}
-              showSpawnOverlay={showSpawnOverlay}
+              //personas={personas}
             />
           ) : null}
         </main>
