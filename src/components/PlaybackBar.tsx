@@ -19,6 +19,7 @@ export function PlaybackBar({ ctrl, simTime }: { ctrl: PlaybackController; simTi
         alignItems: "center",
         borderRadius: 8,
         fontFamily: "monospace",
+        zIndex: 30,
       }}
     >
       <button

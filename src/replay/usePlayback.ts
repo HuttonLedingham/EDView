@@ -26,29 +26,51 @@ export function usePlayback(opts: {
   const rafRef = useRef<number | null>(null);
   const lastTickRef = useRef<number | null>(null);
 
-  const tick = useCallback(
-    (now: number) => {
-      if (lastTickRef.current === null) lastTickRef.current = now;
-      const dtSec = (now - lastTickRef.current) / 1000;
-      lastTickRef.current = now;
+  // Track the fractional position independently to avoid calling setState
+  // inside another setState updater (which is a React anti-pattern and may
+  // cause updates to be silently dropped in React 18 concurrent mode).
+  const fractionalStepRef = useRef<number>(0);
 
-      const stepsAdvanced = (dtSec * speed) / opts.secPerStep;
-      setCurrentStep((prev) => {
-        let next = prev + stepsAdvanced;
-        const max = opts.totalSteps - 1;
-        if (next >= max) {
-          next = max;
-          setIsPlaying(false);
-        }
-        const intStep = Math.floor(next);
-        setInterpAlpha(next - intStep);
-        return intStep;
-      });
+  // Keep a ref to opts so tick doesn't need to be recreated on every opts change.
+  const optsRef = useRef(opts);
+  optsRef.current = opts;
 
-      rafRef.current = requestAnimationFrame(tick);
-    },
-    [opts.secPerStep, opts.totalSteps, speed]
-  );
+  // Keep a ref to speed so tick doesn't need to be recreated on every speed change.
+  const speedRef = useRef(speed);
+  speedRef.current = speed;
+
+  const tick = useCallback((now: number) => {
+    if (lastTickRef.current === null) lastTickRef.current = now;
+    const dtSec = (now - lastTickRef.current) / 1000;
+    lastTickRef.current = now;
+
+    const { totalSteps, secPerStep } = optsRef.current;
+    const stepsAdvanced = (dtSec * speedRef.current) / secPerStep;
+
+    const prevFrac = fractionalStepRef.current;
+    let nextFrac = prevFrac + stepsAdvanced;
+    const max = totalSteps - 1;
+
+    let stopped = false;
+    if (nextFrac >= max) {
+      nextFrac = max;
+      stopped = true;
+    }
+
+    fractionalStepRef.current = nextFrac;
+    const intStep = Math.floor(nextFrac);
+    const alpha = nextFrac - intStep;
+
+    setCurrentStep(intStep);
+    setInterpAlpha(alpha);
+
+    if (stopped) {
+      setIsPlaying(false);
+      return; // don't schedule another frame
+    }
+
+    rafRef.current = requestAnimationFrame(tick);
+  }, []); // stable callback — reads all mutable values from refs
 
   useEffect(() => {
     if (!isPlaying) {
@@ -74,6 +96,7 @@ export function usePlayback(opts: {
     setSpeed,
     seek: (step: number) => {
       const clamped = Math.max(0, Math.min(opts.totalSteps - 1, Math.floor(step)));
+      fractionalStepRef.current = clamped;
       setCurrentStep(clamped);
       setInterpAlpha(0);
     },

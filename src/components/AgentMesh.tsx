@@ -7,7 +7,6 @@ export function AgentMesh({ state }: { state: PersonaState }) {
   return (
     <group
       position={[state.worldX, state.worldY, state.worldZ]}
-      data-testid={`agent-${state.id.replace(/\s+/g, "_")}`}
     >
       <Capsule args={[0.18, 0.4, 4, 8]}>
         <meshStandardMaterial color={color} />
