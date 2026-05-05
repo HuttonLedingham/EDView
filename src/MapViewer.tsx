@@ -127,7 +127,7 @@ export function MapViewer() {
       style={{
         position: "fixed",
         top: 16,
-        left: 16,
+        right: 16,
         padding: "8px 12px",
         background: "rgba(45,108,223,0.85)",
         color: "white",
@@ -248,7 +248,7 @@ export function MapViewer() {
       <div
         style={{
           position: 'fixed',
-          top: 16,
+          top: 64,
           right: 16,
           color: 'salmon',
           background: 'rgba(0,0,0,0.75)',
@@ -268,7 +268,7 @@ export function MapViewer() {
       <div
         style={{
           position: 'fixed',
-          top: replayError ? 64 : 16,
+          top: replayError ? 112 : 64,
           right: 16,
           color: 'orange',
           background: 'rgba(0,0,0,0.75)',
