@@ -13,7 +13,12 @@ export interface PersonaState {
   finalState?: ReplayPersonaFinalState;
 }
 
-const AGENT_HEIGHT = 0.7;
+// Avatars float above all furniture (tallest equipment is medical equipment
+// at world Y ≈ 1.15). FLOATING_Y is the absolute world-Y of the capsule
+// CENTER. With the capsule (radius 0.25, length 0.55) used in AgentMesh, the
+// bottom of the capsule lands at FLOATING_Y - 0.525 = 1.175, just above the
+// tallest furniture. If new equipment exceeds Y=1.15, bump FLOATING_Y.
+const FLOATING_Y = 1.7;
 
 export function usePersonaPositions(args: {
   expanded: ExpandedFrame[];
@@ -51,7 +56,7 @@ export function usePersonaPositions(args: {
         role,
         worldX: lerpX + 0.5,
         worldZ: lerpY + 0.5,
-        worldY: AGENT_HEIGHT * 0.5,
+        worldY: FLOATING_Y,
         pronunciatio: delta.pronunciatio ?? null,
         description: delta.description ?? null,
         finalState: meta?.finalState,
