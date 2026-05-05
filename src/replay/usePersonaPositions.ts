@@ -26,7 +26,13 @@ const FLOATING_Y = 1.1;
 // persona's slot is determined by sorting the tile's persona ids — so the
 // assignment is deterministic per frame and same-tile avatars always get
 // distinct slots regardless of count.
-const FAN_RADIUS = 0.22;
+//
+// FAN_PHASE rotates the entire ring by 45° so 2-persona groups land on
+// the NE/SW diagonal and 4-persona groups on the four diagonals — never
+// on cardinal axes. This keeps nameplates from projecting onto the same
+// screen-Y line and overlapping when viewed from the default camera angle.
+const FAN_RADIUS = 0.32;
+const FAN_PHASE = Math.PI / 4;
 
 export function usePersonaPositions(args: {
   expanded: ExpandedFrame[];
@@ -78,7 +84,7 @@ export function usePersonaPositions(args: {
       let dz = 0;
       if (group.length > 1) {
         const slotIdx = group.indexOf(id);
-        const angle = (slotIdx / group.length) * Math.PI * 2;
+        const angle = (slotIdx / group.length) * Math.PI * 2 + FAN_PHASE;
         dx = Math.cos(angle) * FAN_RADIUS;
         dz = Math.sin(angle) * FAN_RADIUS;
       }
