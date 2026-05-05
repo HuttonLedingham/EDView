@@ -13,12 +13,27 @@ export interface PersonaState {
   finalState?: ReplayPersonaFinalState;
 }
 
-// Avatars float above all furniture (tallest equipment is medical equipment
-// at world Y ≈ 1.15). FLOATING_Y is the absolute world-Y of the capsule
-// CENTER. With the capsule (radius 0.25, length 0.55) used in AgentMesh, the
-// bottom of the capsule lands at FLOATING_Y - 0.525 = 1.175, just above the
-// tallest furniture. If new equipment exceeds Y=1.15, bump FLOATING_Y.
-const FLOATING_Y = 1.7;
+// Avatars float above most furniture but stay visually grounded. With the
+// capsule (radius 0.25, length 0.55) used in AgentMesh, FLOATING_Y=1.3 puts
+// the capsule center at 1.3 and its bottom at 0.775 — clearly above beds
+// (0.80) and chairs (0.78) for the common case, slightly intersecting the
+// rare tall equipment (diagnostic table 0.98, medical equipment 1.15) which
+// is acceptable because the head still floats well above.
+const FLOATING_Y = 1.3;
+
+// Deterministic XZ jitter per persona id so co-located avatars (e.g.
+// doctor + nurse + patient sharing a trauma-room tile) fan out into 8
+// fixed sub-tile slots instead of stacking on top of each other. The same
+// persona always picks the same direction, so motion lerps cleanly.
+const JITTER_RADIUS = 0.18;
+function jitterFromId(id: string): [number, number] {
+  let h = 0;
+  for (let i = 0; i < id.length; i++) {
+    h = ((h * 31) + id.charCodeAt(i)) >>> 0;
+  }
+  const angle = (h % 8) * (Math.PI / 4);
+  return [Math.cos(angle) * JITTER_RADIUS, Math.sin(angle) * JITTER_RADIUS];
+}
 
 export function usePersonaPositions(args: {
   expanded: ExpandedFrame[];
@@ -51,11 +66,13 @@ export function usePersonaPositions(args: {
       const lerpX = fromX + (toX - fromX) * args.interpAlpha;
       const lerpY = fromY + (toY - fromY) * args.interpAlpha;
 
+      const [jx, jz] = jitterFromId(id);
+
       out[id] = {
         id,
         role,
-        worldX: lerpX + 0.5,
-        worldZ: lerpY + 0.5,
+        worldX: lerpX + 0.5 + jx,
+        worldZ: lerpY + 0.5 + jz,
         worldY: FLOATING_Y,
         pronunciatio: delta.pronunciatio ?? null,
         description: delta.description ?? null,
