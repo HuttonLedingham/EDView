@@ -1,0 +1,3636 @@
+{
+  "schemaVersion": 1,
+  "mapId": "small_ed_layout",
+  "metadata": {
+    "simulationId": "experiment_small_ed_demo_run",
+    "simStartIso": "2025-09-30",
+    "secPerStep": 5,
+    "totalSteps": 600,
+    "mazeName": "small_ed_layout",
+    "widthInTiles": 30,
+    "heightInTiles": 20,
+    "builderVersion": "0.1.0"
+  },
+  "personas": [
+    {
+      "id": "Patient 1",
+      "role": "Patient",
+      "finalState": {
+        "state": "WAITING_FOR_RESULT",
+        "ctas": 1,
+        "icd": null,
+        "bedAssignment": null,
+        "injuriesZone": "major injuries zone"
+      }
+    },
+    {
+      "id": "Patient 2",
+      "role": "Patient",
+      "finalState": {
+        "state": "WAITING_FOR_NURSE",
+        "ctas": 3,
+        "icd": null,
+        "bedAssignment": null,
+        "injuriesZone": "minor injuries zone"
+      }
+    },
+    {
+      "id": "Triage Nurse 1",
+      "role": "TriageNurse"
+    },
+    {
+      "id": "Bedside Nurse 1",
+      "role": "BedsideNurse"
+    },
+    {
+      "id": "Doctor 1",
+      "role": "Doctor"
+    },
+    {
+      "id": "Patient 3",
+      "role": "Patient",
+      "finalState": {
+        "state": "WAITING_FOR_NURSE",
+        "ctas": 4,
+        "icd": "R51",
+        "bedAssignment": null,
+        "injuriesZone": "minor injuries zone"
+      }
+    },
+    {
+      "id": "Patient 4",
+      "role": "Patient",
+      "finalState": {
+        "state": "WAITING_FOR_NURSE",
+        "ctas": 3,
+        "icd": "R07.3",
+        "bedAssignment": null,
+        "injuriesZone": "minor injuries zone"
+      }
+    }
+  ],
+  "frames": [
+    {
+      "step": 0,
+      "simTime": "September 30, 2025, 06:00:00",
+      "agents": {
+        "Patient 1": {
+          "x": 1,
+          "y": 12,
+          "pronunciatio": "⌛",
+          "description": "Patient is currently in state 'WAITING_FOR_TRIAGE' with CTAS 1'. @ ed map:emergency department:waiting room:waiting room chair"
+        },
+        "Patient 2": {
+          "x": 3,
+          "y": 12,
+          "pronunciatio": "⌛",
+          "description": "Patient is currently in state 'WAITING_FOR_TRIAGE' with CTAS 3'. @ ed map:emergency department:waiting room:waiting room chair"
+        },
+        "Triage Nurse 1": {
+          "x": 13,
+          "y": 13,
+          "description": "None @ ed map:emergency department:triage room:computer"
+        },
+        "Bedside Nurse 1": {
+          "x": 23,
+          "y": 3,
+          "pronunciatio": "⏳",
+          "description": "None @ <waiting> 23 3"
+        },
+        "Doctor 1": {
+          "x": 9,
+          "y": 6,
+          "description": "None @ ed map:emergency department:minor injuries zone:bed:27:11"
+        },
+        "Patient 3": {
+          "x": 1,
+          "y": 13,
+          "pronunciatio": "⌛",
+          "description": "Patient is currently in state 'WAITING_FOR_TRIAGE' with CTAS 4'. @ ed map:emergency department:waiting room:waiting room chair"
+        },
+        "Patient 4": {
+          "x": 3,
+          "y": 12,
+          "pronunciatio": "⌛",
+          "description": "Patient is currently in state 'WAITING_FOR_TRIAGE' with CTAS 3'. @ ed map:emergency department:waiting room:waiting room chair"
+        }
+      }
+    },
+    {
+      "step": 1,
+      "simTime": "September 30, 2025, 06:00:05",
+      "agents": {
+        "Patient 1": {
+          "x": 5,
+          "y": 9,
+          "pronunciatio": "⚕️",
+          "description": "Patient is currently in state 'TRIAGE' with CTAS 1'. @ Triage Nurse 1"
+        },
+        "Bedside Nurse 1": {
+          "x": 23,
+          "y": 3,
+          "pronunciatio": "☁️",
+          "description": "None @ <waiting> 23 3"
+        },
+        "Doctor 1": {
+          "x": 16,
+          "y": 6,
+          "description": "None @ <waiting> 9 6"
+        },
+        "Patient 3": {
+          "x": 1,
+          "y": 12,
+          "pronunciatio": "⌛",
+          "description": "Patient is currently in state 'WAITING_FOR_TRIAGE' with CTAS 4'. @ ed map:emergency department:waiting room:waiting room chair"
+        },
+        "Patient 4": {
+          "x": 3,
+          "y": 10,
+          "pronunciatio": "⌛",
+          "description": "Patient is currently in state 'WAITING_FOR_TRIAGE' with CTAS 3'. @ ed map:emergency department:waiting room:waiting room chair"
+        }
+      }
+    },
+    {
+      "step": 2,
+      "simTime": "September 30, 2025, 06:00:10",
+      "agents": {
+        "Patient 1": {
+          "x": 11,
+          "y": 9,
+          "pronunciatio": "⚕️",
+          "description": "Patient is currently in state 'TRIAGE' with CTAS 1'. @ Triage Nurse 1"
+        },
+        "Doctor 1": {
+          "x": 21,
+          "y": 8,
+          "description": "None @ <waiting> 16 6"
+        }
+      }
+    },
+    {
+      "step": 3,
+      "simTime": "September 30, 2025, 06:00:15",
+      "agents": {
+        "Patient 1": {
+          "x": 12,
+          "y": 11,
+          "pronunciatio": "⚕️",
+          "description": "Patient is currently in state 'TRIAGE' with CTAS 1'. @ Triage Nurse 1"
+        },
+        "Doctor 1": {
+          "x": 27,
+          "y": 9,
+          "description": "None @ <waiting> 21 8"
+        }
+      }
+    },
+    {
+      "step": 4,
+      "simTime": "September 30, 2025, 06:00:20",
+      "agents": {
+        "Patient 1": {
+          "x": 13,
+          "y": 12,
+          "pronunciatio": "⚕️",
+          "description": "Patient is currently in state 'TRIAGE' with CTAS 1'. @ Triage Nurse 1"
+        },
+        "Triage Nurse 1": {
+          "x": 13,
+          "y": 13,
+          "pronunciatio": "💬",
+          "description": "Waiting to interact with Patient 1.",
+          "chat": [
+            [
+              "Triage Nurse 1",
+              "Hi, I’m one of the triage nurses. What brought you in today, and how severe is your pain or symptoms on a scale of 1 to 10?"
+            ],
+            [
+              "Patient 1",
+              "*[struggling to speak, clutching at myself]*"
+            ]
+          ]
+        },
+        "Doctor 1": {
+          "x": 27,
+          "y": 11,
+          "description": "None @ <waiting> 27 9"
+        }
+      }
+    },
+    {
+      "step": 5,
+      "simTime": "September 30, 2025, 06:00:25",
+      "agents": {
+        "Patient 1": {
+          "x": 13,
+          "y": 12,
+          "pronunciatio": "⌛",
+          "description": "Waiting to interact with Triage Nurse 1.",
+          "chat": [
+            [
+              "Triage Nurse 1",
+              "Hi, I’m one of the triage nurses. What brought you in today, and how severe is your pain or symptoms on a scale of 1 to 10?"
+            ],
+            [
+              "Patient 1",
+              "*[struggling to speak, clutching at myself]*"
+            ]
+          ]
+        },
+        "Triage Nurse 1": {
+          "x": 13,
+          "y": 13,
+          "pronunciatio": "⏳",
+          "description": "conversing about a triage nurse asked the patient what brought them in and how severe their symptoms were, but the patient was struggling to speak and clutching at themselves, indicating a likely high-acuity presentation with a CTAS score of 2 and need for the major injuries zone @ <waiting> 13 13",
+          "chat": [
+            [
+              "Triage Nurse 1",
+              "Hi, I’m one of the triage nurses. What brought you in today, and how severe is your pain or symptoms on a scale of 1 to 10?"
+            ],
+            [
+              "Patient 1",
+              "*[struggling to speak, clutching at myself]*"
+            ]
+          ]
+        },
+        "Doctor 1": {
+          "x": 27,
+          "y": 11,
+          "description": "None @ <waiting> 27 11"
+        }
+      }
+    },
+    {
+      "step": 6,
+      "simTime": "September 30, 2025, 06:00:30",
+      "agents": {}
+    },
+    {
+      "step": 7,
+      "simTime": "September 30, 2025, 06:00:35",
+      "agents": {}
+    },
+    {
+      "step": 8,
+      "simTime": "September 30, 2025, 06:00:40",
+      "agents": {}
+    },
+    {
+      "step": 9,
+      "simTime": "September 30, 2025, 06:00:45",
+      "agents": {}
+    },
+    {
+      "step": 10,
+      "simTime": "September 30, 2025, 06:00:50",
+      "agents": {}
+    },
+    {
+      "step": 11,
+      "simTime": "September 30, 2025, 06:00:55",
+      "agents": {}
+    },
+    {
+      "step": 12,
+      "simTime": "September 30, 2025, 06:01:00",
+      "agents": {}
+    },
+    {
+      "step": 13,
+      "simTime": "September 30, 2025, 06:01:05",
+      "agents": {}
+    },
+    {
+      "step": 14,
+      "simTime": "September 30, 2025, 06:01:10",
+      "agents": {}
+    },
+    {
+      "step": 15,
+      "simTime": "September 30, 2025, 06:01:15",
+      "agents": {}
+    },
+    {
+      "step": 16,
+      "simTime": "September 30, 2025, 06:01:20",
+      "agents": {}
+    },
+    {
+      "step": 17,
+      "simTime": "September 30, 2025, 06:01:25",
+      "agents": {}
+    },
+    {
+      "step": 18,
+      "simTime": "September 30, 2025, 06:01:30",
+      "agents": {}
+    },
+    {
+      "step": 19,
+      "simTime": "September 30, 2025, 06:01:35",
+      "agents": {}
+    },
+    {
+      "step": 20,
+      "simTime": "September 30, 2025, 06:01:40",
+      "agents": {}
+    },
+    {
+      "step": 21,
+      "simTime": "September 30, 2025, 06:01:45",
+      "agents": {}
+    },
+    {
+      "step": 22,
+      "simTime": "September 30, 2025, 06:01:50",
+      "agents": {}
+    },
+    {
+      "step": 23,
+      "simTime": "September 30, 2025, 06:01:55",
+      "agents": {}
+    },
+    {
+      "step": 24,
+      "simTime": "September 30, 2025, 06:02:00",
+      "agents": {
+        "Patient 1": {
+          "x": 9,
+          "y": 9,
+          "pronunciatio": "⌛",
+          "description": "Patient is currently in state 'WAITING_FOR_NURSE' with CTAS 1'. @ ed map:emergency department:waiting room:waiting room chair"
+        },
+        "Triage Nurse 1": {
+          "x": 13,
+          "y": 13,
+          "pronunciatio": "⏳",
+          "description": "conversing about a triage nurse asked the patient what brought them in and how severe their symptoms were, but the patient was struggling to speak and clutching at themselves, indicating a likely high-acuity presentation with a CTAS score of 2 and need for the major injuries zone @ ed map:emergency department:triage room:computer"
+        },
+        "Bedside Nurse 1": {
+          "x": 19,
+          "y": 6,
+          "pronunciatio": "☁️",
+          "description": "None @ <waiting> 23 3"
+        }
+      }
+    },
+    {
+      "step": 25,
+      "simTime": "September 30, 2025, 06:02:05",
+      "agents": {
+        "Patient 1": {
+          "x": 16,
+          "y": 9,
+          "pronunciatio": "🛌",
+          "description": "Patient is currently in state 'WAITING_FOR_FIRST_ASSESSMENT' with CTAS 1'. @ (16, 14)"
+        },
+        "Patient 2": {
+          "x": 7,
+          "y": 9,
+          "pronunciatio": "⚕️",
+          "description": "Patient is currently in state 'TRIAGE' with CTAS 3'. @ Triage Nurse 1"
+        },
+        "Bedside Nurse 1": {
+          "x": 16,
+          "y": 10,
+          "pronunciatio": "☁️",
+          "description": "None @ <waiting> 19 6"
+        }
+      }
+    },
+    {
+      "step": 26,
+      "simTime": "September 30, 2025, 06:02:10",
+      "agents": {
+        "Patient 1": {
+          "x": 16,
+          "y": 14,
+          "pronunciatio": "🛌",
+          "description": "Patient is currently in state 'WAITING_FOR_FIRST_ASSESSMENT' with CTAS 1'. @ (16, 14)"
+        },
+        "Patient 2": {
+          "x": 11,
+          "y": 10,
+          "pronunciatio": "⚕️",
+          "description": "Patient is currently in state 'TRIAGE' with CTAS 3'. @ Triage Nurse 1"
+        },
+        "Bedside Nurse 1": {
+          "x": 16,
+          "y": 14,
+          "pronunciatio": "☁️",
+          "description": "None @ <waiting> 16 10"
+        }
+      }
+    },
+    {
+      "step": 27,
+      "simTime": "September 30, 2025, 06:02:15",
+      "agents": {
+        "Patient 2": {
+          "x": 13,
+          "y": 11,
+          "pronunciatio": "⚕️",
+          "description": "Patient is currently in state 'TRIAGE' with CTAS 3'. @ Triage Nurse 1"
+        },
+        "Bedside Nurse 1": {
+          "x": 16,
+          "y": 14,
+          "pronunciatio": "☁️",
+          "description": "None @ <waiting> 16 14"
+        }
+      }
+    },
+    {
+      "step": 28,
+      "simTime": "September 30, 2025, 06:02:20",
+      "agents": {
+        "Patient 2": {
+          "x": 13,
+          "y": 12,
+          "pronunciatio": "⚕️",
+          "description": "Patient is currently in state 'TRIAGE' with CTAS 3'. @ Triage Nurse 1"
+        },
+        "Triage Nurse 1": {
+          "x": 13,
+          "y": 13,
+          "pronunciatio": "💬",
+          "description": "Waiting to interact with Patient 2.",
+          "chat": [
+            [
+              "Triage Nurse 1",
+              "Hi there, I’m one of the triage nurses. Can you tell me what brought you in today and how bad your pain or symptoms are on a scale of 1 to 10?"
+            ],
+            [
+              "Patient 2",
+              "I’m really dizzy — like the room won’t stop spinning — and I’ve thrown up a couple of times. I feel awful, maybe like an 8 out of 10, and I’m scared I’m going to vomit again."
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "step": 29,
+      "simTime": "September 30, 2025, 06:02:25",
+      "agents": {
+        "Patient 2": {
+          "x": 13,
+          "y": 12,
+          "pronunciatio": "⌛",
+          "description": "Waiting to interact with Triage Nurse 1.",
+          "chat": [
+            [
+              "Triage Nurse 1",
+              "Hi there, I’m one of the triage nurses. Can you tell me what brought you in today and how bad your pain or symptoms are on a scale of 1 to 10?"
+            ],
+            [
+              "Patient 2",
+              "I’m really dizzy — like the room won’t stop spinning — and I’ve thrown up a couple of times. I feel awful, maybe like an 8 out of 10, and I’m scared I’m going to vomit again."
+            ]
+          ]
+        },
+        "Triage Nurse 1": {
+          "x": 13,
+          "y": 13,
+          "pronunciatio": "⏳",
+          "description": "conversing about the patient told the triage nurse they are experiencing severe spinning dizziness with repeated vomiting and an 8/10 severity, which is concerning for a CTAS score of 2, and they were directed for urgent assessment in the major injuries zone @ <waiting> 13 13",
+          "chat": [
+            [
+              "Triage Nurse 1",
+              "Hi there, I’m one of the triage nurses. Can you tell me what brought you in today and how bad your pain or symptoms are on a scale of 1 to 10?"
+            ],
+            [
+              "Patient 2",
+              "I’m really dizzy — like the room won’t stop spinning — and I’ve thrown up a couple of times. I feel awful, maybe like an 8 out of 10, and I’m scared I’m going to vomit again."
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "step": 30,
+      "simTime": "September 30, 2025, 06:02:30",
+      "agents": {}
+    },
+    {
+      "step": 31,
+      "simTime": "September 30, 2025, 06:02:35",
+      "agents": {}
+    },
+    {
+      "step": 32,
+      "simTime": "September 30, 2025, 06:02:40",
+      "agents": {}
+    },
+    {
+      "step": 33,
+      "simTime": "September 30, 2025, 06:02:45",
+      "agents": {
+        "Doctor 1": {
+          "x": 21,
+          "y": 10,
+          "description": "None @ Patient 1"
+        }
+      }
+    },
+    {
+      "step": 34,
+      "simTime": "September 30, 2025, 06:02:50",
+      "agents": {
+        "Patient 1": {
+          "x": 16,
+          "y": 14,
+          "pronunciatio": "⌛",
+          "description": "Patient is currently in state 'WAITING_FOR_RESULT' with CTAS 1'. @ (16, 14)"
+        },
+        "Doctor 1": {
+          "x": 20,
+          "y": 9,
+          "description": "None @ Patient 1"
+        }
+      }
+    },
+    {
+      "step": 35,
+      "simTime": "September 30, 2025, 06:02:55",
+      "agents": {
+        "Doctor 1": {
+          "x": 16,
+          "y": 10,
+          "description": "None @ Patient 1"
+        }
+      }
+    },
+    {
+      "step": 36,
+      "simTime": "September 30, 2025, 06:03:00",
+      "agents": {
+        "Doctor 1": {
+          "x": 16,
+          "y": 10,
+          "pronunciatio": "💬",
+          "description": "Waiting to interact with Patient 1.",
+          "chat": [
+            [
+              "Doctor 1",
+              "Hi, I’m Dr. 1. I’m here to check in on you and go over what brought you in today—can you tell me what symptoms you’re having, when they started, and how severe they are?"
+            ],
+            [
+              "Patient 1",
+              "I can’t talk. It hurts everywhere. I got hit by a car and I’m bleeding a lot."
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "step": 37,
+      "simTime": "September 30, 2025, 06:03:05",
+      "agents": {
+        "Patient 1": {
+          "x": 16,
+          "y": 14,
+          "pronunciatio": "⌛",
+          "description": "Waiting to interact with Doctor 1.",
+          "chat": [
+            [
+              "Doctor 1",
+              "Hi, I’m Dr. 1. I’m here to check in on you and go over what brought you in today—can you tell me what symptoms you’re having, when they started, and how severe they are?"
+            ],
+            [
+              "Patient 1",
+              "I can’t talk. It hurts everywhere. I got hit by a car and I’m bleeding a lot."
+            ]
+          ]
+        },
+        "Doctor 1": {
+          "x": 16,
+          "y": 10,
+          "pronunciatio": "⏳",
+          "description": "conversing about <fill in> an emergency medical assessment between Doctor 1 and a patient who was hit by a car, is bleeding heavily, and reports widespread pain and inability to speak @ <waiting> 16 10",
+          "chat": [
+            [
+              "Doctor 1",
+              "Hi, I’m Dr. 1. I’m here to check in on you and go over what brought you in today—can you tell me what symptoms you’re having, when they started, and how severe they are?"
+            ],
+            [
+              "Patient 1",
+              "I can’t talk. It hurts everywhere. I got hit by a car and I’m bleeding a lot."
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "step": 38,
+      "simTime": "September 30, 2025, 06:03:10",
+      "agents": {}
+    },
+    {
+      "step": 39,
+      "simTime": "September 30, 2025, 06:03:15",
+      "agents": {}
+    },
+    {
+      "step": 40,
+      "simTime": "September 30, 2025, 06:03:20",
+      "agents": {}
+    },
+    {
+      "step": 41,
+      "simTime": "September 30, 2025, 06:03:25",
+      "agents": {}
+    },
+    {
+      "step": 42,
+      "simTime": "September 30, 2025, 06:03:30",
+      "agents": {}
+    },
+    {
+      "step": 43,
+      "simTime": "September 30, 2025, 06:03:35",
+      "agents": {}
+    },
+    {
+      "step": 44,
+      "simTime": "September 30, 2025, 06:03:40",
+      "agents": {}
+    },
+    {
+      "step": 45,
+      "simTime": "September 30, 2025, 06:03:45",
+      "agents": {}
+    },
+    {
+      "step": 46,
+      "simTime": "September 30, 2025, 06:03:50",
+      "agents": {}
+    },
+    {
+      "step": 47,
+      "simTime": "September 30, 2025, 06:03:55",
+      "agents": {}
+    },
+    {
+      "step": 48,
+      "simTime": "September 30, 2025, 06:04:00",
+      "agents": {
+        "Patient 1": {
+          "x": 16,
+          "y": 14,
+          "pronunciatio": "⌛",
+          "description": "Patient is currently in state 'WAITING_FOR_RESULT' with CTAS 1'. @ (16, 14)"
+        },
+        "Patient 2": {
+          "x": 9,
+          "y": 9,
+          "pronunciatio": "⌛",
+          "description": "Patient is currently in state 'WAITING_FOR_NURSE' with CTAS 3'. @ ed map:emergency department:waiting room:waiting room chair"
+        },
+        "Triage Nurse 1": {
+          "x": 13,
+          "y": 13,
+          "pronunciatio": "⏳",
+          "description": "conversing about the patient told the triage nurse they are experiencing severe spinning dizziness with repeated vomiting and an 8/10 severity, which is concerning for a CTAS score of 2, and they were directed for urgent assessment in the major injuries zone @ ed map:emergency department:triage room:computer"
+        },
+        "Doctor 1": {
+          "x": 16,
+          "y": 10,
+          "pronunciatio": "⏳",
+          "description": "conversing about <fill in> an emergency medical assessment between Doctor 1 and a patient who was hit by a car, is bleeding heavily, and reports widespread pain and inability to speak @ <waiting> 16 10"
+        },
+        "Patient 3": {
+          "x": 5,
+          "y": 9,
+          "pronunciatio": "⚕️",
+          "description": "Patient is currently in state 'TRIAGE' with CTAS 4'. @ Triage Nurse 1"
+        }
+      }
+    },
+    {
+      "step": 49,
+      "simTime": "September 30, 2025, 06:04:05",
+      "agents": {
+        "Patient 2": {
+          "x": 2,
+          "y": 9,
+          "pronunciatio": "⌛",
+          "description": "Patient is currently in state 'WAITING_FOR_NURSE' with CTAS 3'. @ ed map:emergency department:waiting room:waiting room chair"
+        },
+        "Patient 3": {
+          "x": 11,
+          "y": 9,
+          "pronunciatio": "⚕️",
+          "description": "Patient is currently in state 'TRIAGE' with CTAS 4'. @ Triage Nurse 1"
+        }
+      }
+    },
+    {
+      "step": 50,
+      "simTime": "September 30, 2025, 06:04:10",
+      "agents": {
+        "Patient 2": {
+          "x": 1,
+          "y": 8,
+          "pronunciatio": "⌛",
+          "description": "Patient is currently in state 'WAITING_FOR_NURSE' with CTAS 3'. @ ed map:emergency department:waiting room:waiting room chair"
+        },
+        "Patient 3": {
+          "x": 12,
+          "y": 11,
+          "pronunciatio": "⚕️",
+          "description": "Patient is currently in state 'TRIAGE' with CTAS 4'. @ Triage Nurse 1"
+        }
+      }
+    },
+    {
+      "step": 51,
+      "simTime": "September 30, 2025, 06:04:15",
+      "agents": {
+        "Patient 3": {
+          "x": 13,
+          "y": 12,
+          "pronunciatio": "⚕️",
+          "description": "Patient is currently in state 'TRIAGE' with CTAS 4'. @ Triage Nurse 1"
+        }
+      }
+    },
+    {
+      "step": 52,
+      "simTime": "September 30, 2025, 06:04:20",
+      "agents": {
+        "Patient 3": {
+          "x": 13,
+          "y": 13,
+          "pronunciatio": "⚕️",
+          "description": "Patient is currently in state 'TRIAGE' with CTAS 4'. @ Triage Nurse 1"
+        }
+      }
+    },
+    {
+      "step": 53,
+      "simTime": "September 30, 2025, 06:04:25",
+      "agents": {}
+    },
+    {
+      "step": 54,
+      "simTime": "September 30, 2025, 06:04:30",
+      "agents": {}
+    },
+    {
+      "step": 55,
+      "simTime": "September 30, 2025, 06:04:35",
+      "agents": {}
+    },
+    {
+      "step": 56,
+      "simTime": "September 30, 2025, 06:04:40",
+      "agents": {}
+    },
+    {
+      "step": 57,
+      "simTime": "September 30, 2025, 06:04:45",
+      "agents": {}
+    },
+    {
+      "step": 58,
+      "simTime": "September 30, 2025, 06:04:50",
+      "agents": {}
+    },
+    {
+      "step": 59,
+      "simTime": "September 30, 2025, 06:04:55",
+      "agents": {}
+    },
+    {
+      "step": 60,
+      "simTime": "September 30, 2025, 06:05:00",
+      "agents": {}
+    },
+    {
+      "step": 61,
+      "simTime": "September 30, 2025, 06:05:05",
+      "agents": {}
+    },
+    {
+      "step": 62,
+      "simTime": "September 30, 2025, 06:05:10",
+      "agents": {}
+    },
+    {
+      "step": 63,
+      "simTime": "September 30, 2025, 06:05:15",
+      "agents": {}
+    },
+    {
+      "step": 64,
+      "simTime": "September 30, 2025, 06:05:20",
+      "agents": {}
+    },
+    {
+      "step": 65,
+      "simTime": "September 30, 2025, 06:05:25",
+      "agents": {}
+    },
+    {
+      "step": 66,
+      "simTime": "September 30, 2025, 06:05:30",
+      "agents": {}
+    },
+    {
+      "step": 67,
+      "simTime": "September 30, 2025, 06:05:35",
+      "agents": {}
+    },
+    {
+      "step": 68,
+      "simTime": "September 30, 2025, 06:05:40",
+      "agents": {}
+    },
+    {
+      "step": 69,
+      "simTime": "September 30, 2025, 06:05:45",
+      "agents": {}
+    },
+    {
+      "step": 70,
+      "simTime": "September 30, 2025, 06:05:50",
+      "agents": {}
+    },
+    {
+      "step": 71,
+      "simTime": "September 30, 2025, 06:05:55",
+      "agents": {}
+    },
+    {
+      "step": 72,
+      "simTime": "September 30, 2025, 06:06:00",
+      "agents": {}
+    },
+    {
+      "step": 73,
+      "simTime": "September 30, 2025, 06:06:05",
+      "agents": {}
+    },
+    {
+      "step": 74,
+      "simTime": "September 30, 2025, 06:06:10",
+      "agents": {}
+    },
+    {
+      "step": 75,
+      "simTime": "September 30, 2025, 06:06:15",
+      "agents": {}
+    },
+    {
+      "step": 76,
+      "simTime": "September 30, 2025, 06:06:20",
+      "agents": {}
+    },
+    {
+      "step": 77,
+      "simTime": "September 30, 2025, 06:06:25",
+      "agents": {}
+    },
+    {
+      "step": 78,
+      "simTime": "September 30, 2025, 06:06:30",
+      "agents": {}
+    },
+    {
+      "step": 79,
+      "simTime": "September 30, 2025, 06:06:35",
+      "agents": {}
+    },
+    {
+      "step": 80,
+      "simTime": "September 30, 2025, 06:06:40",
+      "agents": {}
+    },
+    {
+      "step": 81,
+      "simTime": "September 30, 2025, 06:06:45",
+      "agents": {}
+    },
+    {
+      "step": 82,
+      "simTime": "September 30, 2025, 06:06:50",
+      "agents": {}
+    },
+    {
+      "step": 83,
+      "simTime": "September 30, 2025, 06:06:55",
+      "agents": {}
+    },
+    {
+      "step": 84,
+      "simTime": "September 30, 2025, 06:07:00",
+      "agents": {
+        "Patient 3": {
+          "x": 10,
+          "y": 9,
+          "pronunciatio": "⌛",
+          "description": "Patient is currently in state 'WAITING_FOR_NURSE' with CTAS 4'. @ ed map:emergency department:waiting room:waiting room chair"
+        },
+        "Patient 4": {
+          "x": 9,
+          "y": 9,
+          "pronunciatio": "⚕️",
+          "description": "Patient is currently in state 'TRIAGE' with CTAS 3'. @ Triage Nurse 1"
+        }
+      }
+    },
+    {
+      "step": 85,
+      "simTime": "September 30, 2025, 06:07:05",
+      "agents": {
+        "Patient 3": {
+          "x": 3,
+          "y": 9,
+          "pronunciatio": "⌛",
+          "description": "Patient is currently in state 'WAITING_FOR_NURSE' with CTAS 4'. @ ed map:emergency department:waiting room:waiting room chair"
+        },
+        "Patient 4": {
+          "x": 11,
+          "y": 11,
+          "pronunciatio": "⚕️",
+          "description": "Patient is currently in state 'TRIAGE' with CTAS 3'. @ Triage Nurse 1"
+        }
+      }
+    },
+    {
+      "step": 86,
+      "simTime": "September 30, 2025, 06:07:10",
+      "agents": {
+        "Patient 3": {
+          "x": 1,
+          "y": 8,
+          "pronunciatio": "⌛",
+          "description": "Patient is currently in state 'WAITING_FOR_NURSE' with CTAS 4'. @ ed map:emergency department:waiting room:waiting room chair"
+        },
+        "Patient 4": {
+          "x": 13,
+          "y": 11,
+          "pronunciatio": "⚕️",
+          "description": "Patient is currently in state 'TRIAGE' with CTAS 3'. @ Triage Nurse 1"
+        }
+      }
+    },
+    {
+      "step": 87,
+      "simTime": "September 30, 2025, 06:07:15",
+      "agents": {
+        "Patient 4": {
+          "x": 13,
+          "y": 12,
+          "pronunciatio": "⚕️",
+          "description": "Patient is currently in state 'TRIAGE' with CTAS 3'. @ Triage Nurse 1"
+        }
+      }
+    },
+    {
+      "step": 88,
+      "simTime": "September 30, 2025, 06:07:20",
+      "agents": {
+        "Patient 4": {
+          "x": 13,
+          "y": 13,
+          "pronunciatio": "⚕️",
+          "description": "Patient is currently in state 'TRIAGE' with CTAS 3'. @ Triage Nurse 1"
+        }
+      }
+    },
+    {
+      "step": 89,
+      "simTime": "September 30, 2025, 06:07:25",
+      "agents": {}
+    },
+    {
+      "step": 90,
+      "simTime": "September 30, 2025, 06:07:30",
+      "agents": {}
+    },
+    {
+      "step": 91,
+      "simTime": "September 30, 2025, 06:07:35",
+      "agents": {}
+    },
+    {
+      "step": 92,
+      "simTime": "September 30, 2025, 06:07:40",
+      "agents": {}
+    },
+    {
+      "step": 93,
+      "simTime": "September 30, 2025, 06:07:45",
+      "agents": {}
+    },
+    {
+      "step": 94,
+      "simTime": "September 30, 2025, 06:07:50",
+      "agents": {}
+    },
+    {
+      "step": 95,
+      "simTime": "September 30, 2025, 06:07:55",
+      "agents": {}
+    },
+    {
+      "step": 96,
+      "simTime": "September 30, 2025, 06:08:00",
+      "agents": {}
+    },
+    {
+      "step": 97,
+      "simTime": "September 30, 2025, 06:08:05",
+      "agents": {}
+    },
+    {
+      "step": 98,
+      "simTime": "September 30, 2025, 06:08:10",
+      "agents": {}
+    },
+    {
+      "step": 99,
+      "simTime": "September 30, 2025, 06:08:15",
+      "agents": {}
+    },
+    {
+      "step": 100,
+      "simTime": "September 30, 2025, 06:08:20",
+      "agents": {}
+    },
+    {
+      "step": 101,
+      "simTime": "September 30, 2025, 06:08:25",
+      "agents": {}
+    },
+    {
+      "step": 102,
+      "simTime": "September 30, 2025, 06:08:30",
+      "agents": {}
+    },
+    {
+      "step": 103,
+      "simTime": "September 30, 2025, 06:08:35",
+      "agents": {}
+    },
+    {
+      "step": 104,
+      "simTime": "September 30, 2025, 06:08:40",
+      "agents": {}
+    },
+    {
+      "step": 105,
+      "simTime": "September 30, 2025, 06:08:45",
+      "agents": {}
+    },
+    {
+      "step": 106,
+      "simTime": "September 30, 2025, 06:08:50",
+      "agents": {}
+    },
+    {
+      "step": 107,
+      "simTime": "September 30, 2025, 06:08:55",
+      "agents": {}
+    },
+    {
+      "step": 108,
+      "simTime": "September 30, 2025, 06:09:00",
+      "agents": {}
+    },
+    {
+      "step": 109,
+      "simTime": "September 30, 2025, 06:09:05",
+      "agents": {}
+    },
+    {
+      "step": 110,
+      "simTime": "September 30, 2025, 06:09:10",
+      "agents": {}
+    },
+    {
+      "step": 111,
+      "simTime": "September 30, 2025, 06:09:15",
+      "agents": {}
+    },
+    {
+      "step": 112,
+      "simTime": "September 30, 2025, 06:09:20",
+      "agents": {}
+    },
+    {
+      "step": 113,
+      "simTime": "September 30, 2025, 06:09:25",
+      "agents": {}
+    },
+    {
+      "step": 114,
+      "simTime": "September 30, 2025, 06:09:30",
+      "agents": {}
+    },
+    {
+      "step": 115,
+      "simTime": "September 30, 2025, 06:09:35",
+      "agents": {}
+    },
+    {
+      "step": 116,
+      "simTime": "September 30, 2025, 06:09:40",
+      "agents": {}
+    },
+    {
+      "step": 117,
+      "simTime": "September 30, 2025, 06:09:45",
+      "agents": {}
+    },
+    {
+      "step": 118,
+      "simTime": "September 30, 2025, 06:09:50",
+      "agents": {}
+    },
+    {
+      "step": 119,
+      "simTime": "September 30, 2025, 06:09:55",
+      "agents": {}
+    },
+    {
+      "step": 120,
+      "simTime": "September 30, 2025, 06:10:00",
+      "agents": {
+        "Patient 4": {
+          "x": 10,
+          "y": 9,
+          "pronunciatio": "⌛",
+          "description": "Patient is currently in state 'WAITING_FOR_NURSE' with CTAS 3'. @ ed map:emergency department:waiting room:waiting room chair"
+        }
+      }
+    },
+    {
+      "step": 121,
+      "simTime": "September 30, 2025, 06:10:05",
+      "agents": {
+        "Patient 4": {
+          "x": 3,
+          "y": 9,
+          "pronunciatio": "⌛",
+          "description": "Patient is currently in state 'WAITING_FOR_NURSE' with CTAS 3'. @ ed map:emergency department:waiting room:waiting room chair"
+        }
+      }
+    },
+    {
+      "step": 122,
+      "simTime": "September 30, 2025, 06:10:10",
+      "agents": {
+        "Patient 4": {
+          "x": 3,
+          "y": 8,
+          "pronunciatio": "⌛",
+          "description": "Patient is currently in state 'WAITING_FOR_NURSE' with CTAS 3'. @ ed map:emergency department:waiting room:waiting room chair"
+        }
+      }
+    },
+    {
+      "step": 123,
+      "simTime": "September 30, 2025, 06:10:15",
+      "agents": {}
+    },
+    {
+      "step": 124,
+      "simTime": "September 30, 2025, 06:10:20",
+      "agents": {}
+    },
+    {
+      "step": 125,
+      "simTime": "September 30, 2025, 06:10:25",
+      "agents": {}
+    },
+    {
+      "step": 126,
+      "simTime": "September 30, 2025, 06:10:30",
+      "agents": {}
+    },
+    {
+      "step": 127,
+      "simTime": "September 30, 2025, 06:10:35",
+      "agents": {}
+    },
+    {
+      "step": 128,
+      "simTime": "September 30, 2025, 06:10:40",
+      "agents": {}
+    },
+    {
+      "step": 129,
+      "simTime": "September 30, 2025, 06:10:45",
+      "agents": {}
+    },
+    {
+      "step": 130,
+      "simTime": "September 30, 2025, 06:10:50",
+      "agents": {}
+    },
+    {
+      "step": 131,
+      "simTime": "September 30, 2025, 06:10:55",
+      "agents": {}
+    },
+    {
+      "step": 132,
+      "simTime": "September 30, 2025, 06:11:00",
+      "agents": {}
+    },
+    {
+      "step": 133,
+      "simTime": "September 30, 2025, 06:11:05",
+      "agents": {}
+    },
+    {
+      "step": 134,
+      "simTime": "September 30, 2025, 06:11:10",
+      "agents": {}
+    },
+    {
+      "step": 135,
+      "simTime": "September 30, 2025, 06:11:15",
+      "agents": {}
+    },
+    {
+      "step": 136,
+      "simTime": "September 30, 2025, 06:11:20",
+      "agents": {}
+    },
+    {
+      "step": 137,
+      "simTime": "September 30, 2025, 06:11:25",
+      "agents": {}
+    },
+    {
+      "step": 138,
+      "simTime": "September 30, 2025, 06:11:30",
+      "agents": {}
+    },
+    {
+      "step": 139,
+      "simTime": "September 30, 2025, 06:11:35",
+      "agents": {}
+    },
+    {
+      "step": 140,
+      "simTime": "September 30, 2025, 06:11:40",
+      "agents": {}
+    },
+    {
+      "step": 141,
+      "simTime": "September 30, 2025, 06:11:45",
+      "agents": {}
+    },
+    {
+      "step": 142,
+      "simTime": "September 30, 2025, 06:11:50",
+      "agents": {}
+    },
+    {
+      "step": 143,
+      "simTime": "September 30, 2025, 06:11:55",
+      "agents": {}
+    },
+    {
+      "step": 144,
+      "simTime": "September 30, 2025, 06:12:00",
+      "agents": {}
+    },
+    {
+      "step": 145,
+      "simTime": "September 30, 2025, 06:12:05",
+      "agents": {}
+    },
+    {
+      "step": 146,
+      "simTime": "September 30, 2025, 06:12:10",
+      "agents": {}
+    },
+    {
+      "step": 147,
+      "simTime": "September 30, 2025, 06:12:15",
+      "agents": {}
+    },
+    {
+      "step": 148,
+      "simTime": "September 30, 2025, 06:12:20",
+      "agents": {}
+    },
+    {
+      "step": 149,
+      "simTime": "September 30, 2025, 06:12:25",
+      "agents": {}
+    },
+    {
+      "step": 150,
+      "simTime": "September 30, 2025, 06:12:30",
+      "agents": {}
+    },
+    {
+      "step": 151,
+      "simTime": "September 30, 2025, 06:12:35",
+      "agents": {}
+    },
+    {
+      "step": 152,
+      "simTime": "September 30, 2025, 06:12:40",
+      "agents": {}
+    },
+    {
+      "step": 153,
+      "simTime": "September 30, 2025, 06:12:45",
+      "agents": {}
+    },
+    {
+      "step": 154,
+      "simTime": "September 30, 2025, 06:12:50",
+      "agents": {}
+    },
+    {
+      "step": 155,
+      "simTime": "September 30, 2025, 06:12:55",
+      "agents": {}
+    },
+    {
+      "step": 156,
+      "simTime": "September 30, 2025, 06:13:00",
+      "agents": {}
+    },
+    {
+      "step": 157,
+      "simTime": "September 30, 2025, 06:13:05",
+      "agents": {}
+    },
+    {
+      "step": 158,
+      "simTime": "September 30, 2025, 06:13:10",
+      "agents": {}
+    },
+    {
+      "step": 159,
+      "simTime": "September 30, 2025, 06:13:15",
+      "agents": {}
+    },
+    {
+      "step": 160,
+      "simTime": "September 30, 2025, 06:13:20",
+      "agents": {}
+    },
+    {
+      "step": 161,
+      "simTime": "September 30, 2025, 06:13:25",
+      "agents": {}
+    },
+    {
+      "step": 162,
+      "simTime": "September 30, 2025, 06:13:30",
+      "agents": {}
+    },
+    {
+      "step": 163,
+      "simTime": "September 30, 2025, 06:13:35",
+      "agents": {}
+    },
+    {
+      "step": 164,
+      "simTime": "September 30, 2025, 06:13:40",
+      "agents": {}
+    },
+    {
+      "step": 165,
+      "simTime": "September 30, 2025, 06:13:45",
+      "agents": {}
+    },
+    {
+      "step": 166,
+      "simTime": "September 30, 2025, 06:13:50",
+      "agents": {}
+    },
+    {
+      "step": 167,
+      "simTime": "September 30, 2025, 06:13:55",
+      "agents": {}
+    },
+    {
+      "step": 168,
+      "simTime": "September 30, 2025, 06:14:00",
+      "agents": {}
+    },
+    {
+      "step": 169,
+      "simTime": "September 30, 2025, 06:14:05",
+      "agents": {}
+    },
+    {
+      "step": 170,
+      "simTime": "September 30, 2025, 06:14:10",
+      "agents": {}
+    },
+    {
+      "step": 171,
+      "simTime": "September 30, 2025, 06:14:15",
+      "agents": {}
+    },
+    {
+      "step": 172,
+      "simTime": "September 30, 2025, 06:14:20",
+      "agents": {}
+    },
+    {
+      "step": 173,
+      "simTime": "September 30, 2025, 06:14:25",
+      "agents": {}
+    },
+    {
+      "step": 174,
+      "simTime": "September 30, 2025, 06:14:30",
+      "agents": {}
+    },
+    {
+      "step": 175,
+      "simTime": "September 30, 2025, 06:14:35",
+      "agents": {}
+    },
+    {
+      "step": 176,
+      "simTime": "September 30, 2025, 06:14:40",
+      "agents": {}
+    },
+    {
+      "step": 177,
+      "simTime": "September 30, 2025, 06:14:45",
+      "agents": {}
+    },
+    {
+      "step": 178,
+      "simTime": "September 30, 2025, 06:14:50",
+      "agents": {}
+    },
+    {
+      "step": 179,
+      "simTime": "September 30, 2025, 06:14:55",
+      "agents": {}
+    },
+    {
+      "step": 180,
+      "simTime": "September 30, 2025, 06:15:00",
+      "agents": {}
+    },
+    {
+      "step": 181,
+      "simTime": "September 30, 2025, 06:15:05",
+      "agents": {}
+    },
+    {
+      "step": 182,
+      "simTime": "September 30, 2025, 06:15:10",
+      "agents": {}
+    },
+    {
+      "step": 183,
+      "simTime": "September 30, 2025, 06:15:15",
+      "agents": {}
+    },
+    {
+      "step": 184,
+      "simTime": "September 30, 2025, 06:15:20",
+      "agents": {}
+    },
+    {
+      "step": 185,
+      "simTime": "September 30, 2025, 06:15:25",
+      "agents": {}
+    },
+    {
+      "step": 186,
+      "simTime": "September 30, 2025, 06:15:30",
+      "agents": {}
+    },
+    {
+      "step": 187,
+      "simTime": "September 30, 2025, 06:15:35",
+      "agents": {}
+    },
+    {
+      "step": 188,
+      "simTime": "September 30, 2025, 06:15:40",
+      "agents": {}
+    },
+    {
+      "step": 189,
+      "simTime": "September 30, 2025, 06:15:45",
+      "agents": {}
+    },
+    {
+      "step": 190,
+      "simTime": "September 30, 2025, 06:15:50",
+      "agents": {}
+    },
+    {
+      "step": 191,
+      "simTime": "September 30, 2025, 06:15:55",
+      "agents": {}
+    },
+    {
+      "step": 192,
+      "simTime": "September 30, 2025, 06:16:00",
+      "agents": {}
+    },
+    {
+      "step": 193,
+      "simTime": "September 30, 2025, 06:16:05",
+      "agents": {}
+    },
+    {
+      "step": 194,
+      "simTime": "September 30, 2025, 06:16:10",
+      "agents": {}
+    },
+    {
+      "step": 195,
+      "simTime": "September 30, 2025, 06:16:15",
+      "agents": {}
+    },
+    {
+      "step": 196,
+      "simTime": "September 30, 2025, 06:16:20",
+      "agents": {}
+    },
+    {
+      "step": 197,
+      "simTime": "September 30, 2025, 06:16:25",
+      "agents": {}
+    },
+    {
+      "step": 198,
+      "simTime": "September 30, 2025, 06:16:30",
+      "agents": {}
+    },
+    {
+      "step": 199,
+      "simTime": "September 30, 2025, 06:16:35",
+      "agents": {}
+    },
+    {
+      "step": 200,
+      "simTime": "September 30, 2025, 06:16:40",
+      "agents": {}
+    },
+    {
+      "step": 201,
+      "simTime": "September 30, 2025, 06:16:45",
+      "agents": {}
+    },
+    {
+      "step": 202,
+      "simTime": "September 30, 2025, 06:16:50",
+      "agents": {}
+    },
+    {
+      "step": 203,
+      "simTime": "September 30, 2025, 06:16:55",
+      "agents": {}
+    },
+    {
+      "step": 204,
+      "simTime": "September 30, 2025, 06:17:00",
+      "agents": {}
+    },
+    {
+      "step": 205,
+      "simTime": "September 30, 2025, 06:17:05",
+      "agents": {}
+    },
+    {
+      "step": 206,
+      "simTime": "September 30, 2025, 06:17:10",
+      "agents": {}
+    },
+    {
+      "step": 207,
+      "simTime": "September 30, 2025, 06:17:15",
+      "agents": {}
+    },
+    {
+      "step": 208,
+      "simTime": "September 30, 2025, 06:17:20",
+      "agents": {}
+    },
+    {
+      "step": 209,
+      "simTime": "September 30, 2025, 06:17:25",
+      "agents": {}
+    },
+    {
+      "step": 210,
+      "simTime": "September 30, 2025, 06:17:30",
+      "agents": {}
+    },
+    {
+      "step": 211,
+      "simTime": "September 30, 2025, 06:17:35",
+      "agents": {}
+    },
+    {
+      "step": 212,
+      "simTime": "September 30, 2025, 06:17:40",
+      "agents": {}
+    },
+    {
+      "step": 213,
+      "simTime": "September 30, 2025, 06:17:45",
+      "agents": {}
+    },
+    {
+      "step": 214,
+      "simTime": "September 30, 2025, 06:17:50",
+      "agents": {}
+    },
+    {
+      "step": 215,
+      "simTime": "September 30, 2025, 06:17:55",
+      "agents": {}
+    },
+    {
+      "step": 216,
+      "simTime": "September 30, 2025, 06:18:00",
+      "agents": {}
+    },
+    {
+      "step": 217,
+      "simTime": "September 30, 2025, 06:18:05",
+      "agents": {}
+    },
+    {
+      "step": 218,
+      "simTime": "September 30, 2025, 06:18:10",
+      "agents": {}
+    },
+    {
+      "step": 219,
+      "simTime": "September 30, 2025, 06:18:15",
+      "agents": {}
+    },
+    {
+      "step": 220,
+      "simTime": "September 30, 2025, 06:18:20",
+      "agents": {}
+    },
+    {
+      "step": 221,
+      "simTime": "September 30, 2025, 06:18:25",
+      "agents": {}
+    },
+    {
+      "step": 222,
+      "simTime": "September 30, 2025, 06:18:30",
+      "agents": {}
+    },
+    {
+      "step": 223,
+      "simTime": "September 30, 2025, 06:18:35",
+      "agents": {}
+    },
+    {
+      "step": 224,
+      "simTime": "September 30, 2025, 06:18:40",
+      "agents": {}
+    },
+    {
+      "step": 225,
+      "simTime": "September 30, 2025, 06:18:45",
+      "agents": {}
+    },
+    {
+      "step": 226,
+      "simTime": "September 30, 2025, 06:18:50",
+      "agents": {}
+    },
+    {
+      "step": 227,
+      "simTime": "September 30, 2025, 06:18:55",
+      "agents": {}
+    },
+    {
+      "step": 228,
+      "simTime": "September 30, 2025, 06:19:00",
+      "agents": {}
+    },
+    {
+      "step": 229,
+      "simTime": "September 30, 2025, 06:19:05",
+      "agents": {
+        "Doctor 1": {
+          "x": 22,
+          "y": 9,
+          "pronunciatio": "⏳",
+          "description": "conversing about <fill in> an emergency medical assessment between Doctor 1 and a patient who was hit by a car, is bleeding heavily, and reports widespread pain and inability to speak @ ed map:emergency department:minor injuries zone:bed:27:13"
+        }
+      }
+    },
+    {
+      "step": 230,
+      "simTime": "September 30, 2025, 06:19:10",
+      "agents": {
+        "Doctor 1": {
+          "x": 27,
+          "y": 11,
+          "pronunciatio": "⏳",
+          "description": "conversing about <fill in> an emergency medical assessment between Doctor 1 and a patient who was hit by a car, is bleeding heavily, and reports widespread pain and inability to speak @ <waiting> 22 9"
+        }
+      }
+    },
+    {
+      "step": 231,
+      "simTime": "September 30, 2025, 06:19:15",
+      "agents": {
+        "Doctor 1": {
+          "x": 27,
+          "y": 13,
+          "pronunciatio": "⏳",
+          "description": "conversing about <fill in> an emergency medical assessment between Doctor 1 and a patient who was hit by a car, is bleeding heavily, and reports widespread pain and inability to speak @ <waiting> 27 11"
+        }
+      }
+    },
+    {
+      "step": 232,
+      "simTime": "September 30, 2025, 06:19:20",
+      "agents": {
+        "Doctor 1": {
+          "x": 27,
+          "y": 13,
+          "pronunciatio": "⏳",
+          "description": "conversing about <fill in> an emergency medical assessment between Doctor 1 and a patient who was hit by a car, is bleeding heavily, and reports widespread pain and inability to speak @ <waiting> 27 13"
+        }
+      }
+    },
+    {
+      "step": 233,
+      "simTime": "September 30, 2025, 06:19:25",
+      "agents": {}
+    },
+    {
+      "step": 234,
+      "simTime": "September 30, 2025, 06:19:30",
+      "agents": {}
+    },
+    {
+      "step": 235,
+      "simTime": "September 30, 2025, 06:19:35",
+      "agents": {}
+    },
+    {
+      "step": 236,
+      "simTime": "September 30, 2025, 06:19:40",
+      "agents": {}
+    },
+    {
+      "step": 237,
+      "simTime": "September 30, 2025, 06:19:45",
+      "agents": {}
+    },
+    {
+      "step": 238,
+      "simTime": "September 30, 2025, 06:19:50",
+      "agents": {}
+    },
+    {
+      "step": 239,
+      "simTime": "September 30, 2025, 06:19:55",
+      "agents": {}
+    },
+    {
+      "step": 240,
+      "simTime": "September 30, 2025, 06:20:00",
+      "agents": {}
+    },
+    {
+      "step": 241,
+      "simTime": "September 30, 2025, 06:20:05",
+      "agents": {}
+    },
+    {
+      "step": 242,
+      "simTime": "September 30, 2025, 06:20:10",
+      "agents": {}
+    },
+    {
+      "step": 243,
+      "simTime": "September 30, 2025, 06:20:15",
+      "agents": {}
+    },
+    {
+      "step": 244,
+      "simTime": "September 30, 2025, 06:20:20",
+      "agents": {}
+    },
+    {
+      "step": 245,
+      "simTime": "September 30, 2025, 06:20:25",
+      "agents": {}
+    },
+    {
+      "step": 246,
+      "simTime": "September 30, 2025, 06:20:30",
+      "agents": {}
+    },
+    {
+      "step": 247,
+      "simTime": "September 30, 2025, 06:20:35",
+      "agents": {}
+    },
+    {
+      "step": 248,
+      "simTime": "September 30, 2025, 06:20:40",
+      "agents": {}
+    },
+    {
+      "step": 249,
+      "simTime": "September 30, 2025, 06:20:45",
+      "agents": {}
+    },
+    {
+      "step": 250,
+      "simTime": "September 30, 2025, 06:20:50",
+      "agents": {}
+    },
+    {
+      "step": 251,
+      "simTime": "September 30, 2025, 06:20:55",
+      "agents": {}
+    },
+    {
+      "step": 252,
+      "simTime": "September 30, 2025, 06:21:00",
+      "agents": {}
+    },
+    {
+      "step": 253,
+      "simTime": "September 30, 2025, 06:21:05",
+      "agents": {}
+    },
+    {
+      "step": 254,
+      "simTime": "September 30, 2025, 06:21:10",
+      "agents": {}
+    },
+    {
+      "step": 255,
+      "simTime": "September 30, 2025, 06:21:15",
+      "agents": {}
+    },
+    {
+      "step": 256,
+      "simTime": "September 30, 2025, 06:21:20",
+      "agents": {}
+    },
+    {
+      "step": 257,
+      "simTime": "September 30, 2025, 06:21:25",
+      "agents": {}
+    },
+    {
+      "step": 258,
+      "simTime": "September 30, 2025, 06:21:30",
+      "agents": {}
+    },
+    {
+      "step": 259,
+      "simTime": "September 30, 2025, 06:21:35",
+      "agents": {}
+    },
+    {
+      "step": 260,
+      "simTime": "September 30, 2025, 06:21:40",
+      "agents": {}
+    },
+    {
+      "step": 261,
+      "simTime": "September 30, 2025, 06:21:45",
+      "agents": {}
+    },
+    {
+      "step": 262,
+      "simTime": "September 30, 2025, 06:21:50",
+      "agents": {}
+    },
+    {
+      "step": 263,
+      "simTime": "September 30, 2025, 06:21:55",
+      "agents": {}
+    },
+    {
+      "step": 264,
+      "simTime": "September 30, 2025, 06:22:00",
+      "agents": {}
+    },
+    {
+      "step": 265,
+      "simTime": "September 30, 2025, 06:22:05",
+      "agents": {}
+    },
+    {
+      "step": 266,
+      "simTime": "September 30, 2025, 06:22:10",
+      "agents": {}
+    },
+    {
+      "step": 267,
+      "simTime": "September 30, 2025, 06:22:15",
+      "agents": {}
+    },
+    {
+      "step": 268,
+      "simTime": "September 30, 2025, 06:22:20",
+      "agents": {}
+    },
+    {
+      "step": 269,
+      "simTime": "September 30, 2025, 06:22:25",
+      "agents": {}
+    },
+    {
+      "step": 270,
+      "simTime": "September 30, 2025, 06:22:30",
+      "agents": {}
+    },
+    {
+      "step": 271,
+      "simTime": "September 30, 2025, 06:22:35",
+      "agents": {}
+    },
+    {
+      "step": 272,
+      "simTime": "September 30, 2025, 06:22:40",
+      "agents": {}
+    },
+    {
+      "step": 273,
+      "simTime": "September 30, 2025, 06:22:45",
+      "agents": {}
+    },
+    {
+      "step": 274,
+      "simTime": "September 30, 2025, 06:22:50",
+      "agents": {}
+    },
+    {
+      "step": 275,
+      "simTime": "September 30, 2025, 06:22:55",
+      "agents": {}
+    },
+    {
+      "step": 276,
+      "simTime": "September 30, 2025, 06:23:00",
+      "agents": {}
+    },
+    {
+      "step": 277,
+      "simTime": "September 30, 2025, 06:23:05",
+      "agents": {}
+    },
+    {
+      "step": 278,
+      "simTime": "September 30, 2025, 06:23:10",
+      "agents": {}
+    },
+    {
+      "step": 279,
+      "simTime": "September 30, 2025, 06:23:15",
+      "agents": {}
+    },
+    {
+      "step": 280,
+      "simTime": "September 30, 2025, 06:23:20",
+      "agents": {}
+    },
+    {
+      "step": 281,
+      "simTime": "September 30, 2025, 06:23:25",
+      "agents": {}
+    },
+    {
+      "step": 282,
+      "simTime": "September 30, 2025, 06:23:30",
+      "agents": {}
+    },
+    {
+      "step": 283,
+      "simTime": "September 30, 2025, 06:23:35",
+      "agents": {}
+    },
+    {
+      "step": 284,
+      "simTime": "September 30, 2025, 06:23:40",
+      "agents": {}
+    },
+    {
+      "step": 285,
+      "simTime": "September 30, 2025, 06:23:45",
+      "agents": {}
+    },
+    {
+      "step": 286,
+      "simTime": "September 30, 2025, 06:23:50",
+      "agents": {}
+    },
+    {
+      "step": 287,
+      "simTime": "September 30, 2025, 06:23:55",
+      "agents": {}
+    },
+    {
+      "step": 288,
+      "simTime": "September 30, 2025, 06:24:00",
+      "agents": {}
+    },
+    {
+      "step": 289,
+      "simTime": "September 30, 2025, 06:24:05",
+      "agents": {}
+    },
+    {
+      "step": 290,
+      "simTime": "September 30, 2025, 06:24:10",
+      "agents": {}
+    },
+    {
+      "step": 291,
+      "simTime": "September 30, 2025, 06:24:15",
+      "agents": {}
+    },
+    {
+      "step": 292,
+      "simTime": "September 30, 2025, 06:24:20",
+      "agents": {}
+    },
+    {
+      "step": 293,
+      "simTime": "September 30, 2025, 06:24:25",
+      "agents": {}
+    },
+    {
+      "step": 294,
+      "simTime": "September 30, 2025, 06:24:30",
+      "agents": {}
+    },
+    {
+      "step": 295,
+      "simTime": "September 30, 2025, 06:24:35",
+      "agents": {}
+    },
+    {
+      "step": 296,
+      "simTime": "September 30, 2025, 06:24:40",
+      "agents": {}
+    },
+    {
+      "step": 297,
+      "simTime": "September 30, 2025, 06:24:45",
+      "agents": {}
+    },
+    {
+      "step": 298,
+      "simTime": "September 30, 2025, 06:24:50",
+      "agents": {}
+    },
+    {
+      "step": 299,
+      "simTime": "September 30, 2025, 06:24:55",
+      "agents": {}
+    },
+    {
+      "step": 300,
+      "simTime": "September 30, 2025, 06:25:00",
+      "agents": {}
+    },
+    {
+      "step": 301,
+      "simTime": "September 30, 2025, 06:25:05",
+      "agents": {}
+    },
+    {
+      "step": 302,
+      "simTime": "September 30, 2025, 06:25:10",
+      "agents": {}
+    },
+    {
+      "step": 303,
+      "simTime": "September 30, 2025, 06:25:15",
+      "agents": {}
+    },
+    {
+      "step": 304,
+      "simTime": "September 30, 2025, 06:25:20",
+      "agents": {}
+    },
+    {
+      "step": 305,
+      "simTime": "September 30, 2025, 06:25:25",
+      "agents": {}
+    },
+    {
+      "step": 306,
+      "simTime": "September 30, 2025, 06:25:30",
+      "agents": {}
+    },
+    {
+      "step": 307,
+      "simTime": "September 30, 2025, 06:25:35",
+      "agents": {}
+    },
+    {
+      "step": 308,
+      "simTime": "September 30, 2025, 06:25:40",
+      "agents": {}
+    },
+    {
+      "step": 309,
+      "simTime": "September 30, 2025, 06:25:45",
+      "agents": {}
+    },
+    {
+      "step": 310,
+      "simTime": "September 30, 2025, 06:25:50",
+      "agents": {}
+    },
+    {
+      "step": 311,
+      "simTime": "September 30, 2025, 06:25:55",
+      "agents": {}
+    },
+    {
+      "step": 312,
+      "simTime": "September 30, 2025, 06:26:00",
+      "agents": {}
+    },
+    {
+      "step": 313,
+      "simTime": "September 30, 2025, 06:26:05",
+      "agents": {}
+    },
+    {
+      "step": 314,
+      "simTime": "September 30, 2025, 06:26:10",
+      "agents": {}
+    },
+    {
+      "step": 315,
+      "simTime": "September 30, 2025, 06:26:15",
+      "agents": {}
+    },
+    {
+      "step": 316,
+      "simTime": "September 30, 2025, 06:26:20",
+      "agents": {}
+    },
+    {
+      "step": 317,
+      "simTime": "September 30, 2025, 06:26:25",
+      "agents": {}
+    },
+    {
+      "step": 318,
+      "simTime": "September 30, 2025, 06:26:30",
+      "agents": {}
+    },
+    {
+      "step": 319,
+      "simTime": "September 30, 2025, 06:26:35",
+      "agents": {}
+    },
+    {
+      "step": 320,
+      "simTime": "September 30, 2025, 06:26:40",
+      "agents": {}
+    },
+    {
+      "step": 321,
+      "simTime": "September 30, 2025, 06:26:45",
+      "agents": {}
+    },
+    {
+      "step": 322,
+      "simTime": "September 30, 2025, 06:26:50",
+      "agents": {}
+    },
+    {
+      "step": 323,
+      "simTime": "September 30, 2025, 06:26:55",
+      "agents": {}
+    },
+    {
+      "step": 324,
+      "simTime": "September 30, 2025, 06:27:00",
+      "agents": {}
+    },
+    {
+      "step": 325,
+      "simTime": "September 30, 2025, 06:27:05",
+      "agents": {}
+    },
+    {
+      "step": 326,
+      "simTime": "September 30, 2025, 06:27:10",
+      "agents": {}
+    },
+    {
+      "step": 327,
+      "simTime": "September 30, 2025, 06:27:15",
+      "agents": {}
+    },
+    {
+      "step": 328,
+      "simTime": "September 30, 2025, 06:27:20",
+      "agents": {}
+    },
+    {
+      "step": 329,
+      "simTime": "September 30, 2025, 06:27:25",
+      "agents": {}
+    },
+    {
+      "step": 330,
+      "simTime": "September 30, 2025, 06:27:30",
+      "agents": {}
+    },
+    {
+      "step": 331,
+      "simTime": "September 30, 2025, 06:27:35",
+      "agents": {}
+    },
+    {
+      "step": 332,
+      "simTime": "September 30, 2025, 06:27:40",
+      "agents": {}
+    },
+    {
+      "step": 333,
+      "simTime": "September 30, 2025, 06:27:45",
+      "agents": {}
+    },
+    {
+      "step": 334,
+      "simTime": "September 30, 2025, 06:27:50",
+      "agents": {}
+    },
+    {
+      "step": 335,
+      "simTime": "September 30, 2025, 06:27:55",
+      "agents": {}
+    },
+    {
+      "step": 336,
+      "simTime": "September 30, 2025, 06:28:00",
+      "agents": {}
+    },
+    {
+      "step": 337,
+      "simTime": "September 30, 2025, 06:28:05",
+      "agents": {}
+    },
+    {
+      "step": 338,
+      "simTime": "September 30, 2025, 06:28:10",
+      "agents": {}
+    },
+    {
+      "step": 339,
+      "simTime": "September 30, 2025, 06:28:15",
+      "agents": {}
+    },
+    {
+      "step": 340,
+      "simTime": "September 30, 2025, 06:28:20",
+      "agents": {}
+    },
+    {
+      "step": 341,
+      "simTime": "September 30, 2025, 06:28:25",
+      "agents": {}
+    },
+    {
+      "step": 342,
+      "simTime": "September 30, 2025, 06:28:30",
+      "agents": {}
+    },
+    {
+      "step": 343,
+      "simTime": "September 30, 2025, 06:28:35",
+      "agents": {}
+    },
+    {
+      "step": 344,
+      "simTime": "September 30, 2025, 06:28:40",
+      "agents": {}
+    },
+    {
+      "step": 345,
+      "simTime": "September 30, 2025, 06:28:45",
+      "agents": {}
+    },
+    {
+      "step": 346,
+      "simTime": "September 30, 2025, 06:28:50",
+      "agents": {}
+    },
+    {
+      "step": 347,
+      "simTime": "September 30, 2025, 06:28:55",
+      "agents": {}
+    },
+    {
+      "step": 348,
+      "simTime": "September 30, 2025, 06:29:00",
+      "agents": {}
+    },
+    {
+      "step": 349,
+      "simTime": "September 30, 2025, 06:29:05",
+      "agents": {}
+    },
+    {
+      "step": 350,
+      "simTime": "September 30, 2025, 06:29:10",
+      "agents": {}
+    },
+    {
+      "step": 351,
+      "simTime": "September 30, 2025, 06:29:15",
+      "agents": {}
+    },
+    {
+      "step": 352,
+      "simTime": "September 30, 2025, 06:29:20",
+      "agents": {}
+    },
+    {
+      "step": 353,
+      "simTime": "September 30, 2025, 06:29:25",
+      "agents": {}
+    },
+    {
+      "step": 354,
+      "simTime": "September 30, 2025, 06:29:30",
+      "agents": {}
+    },
+    {
+      "step": 355,
+      "simTime": "September 30, 2025, 06:29:35",
+      "agents": {}
+    },
+    {
+      "step": 356,
+      "simTime": "September 30, 2025, 06:29:40",
+      "agents": {}
+    },
+    {
+      "step": 357,
+      "simTime": "September 30, 2025, 06:29:45",
+      "agents": {}
+    },
+    {
+      "step": 358,
+      "simTime": "September 30, 2025, 06:29:50",
+      "agents": {}
+    },
+    {
+      "step": 359,
+      "simTime": "September 30, 2025, 06:29:55",
+      "agents": {}
+    },
+    {
+      "step": 360,
+      "simTime": "September 30, 2025, 06:30:00",
+      "agents": {}
+    },
+    {
+      "step": 361,
+      "simTime": "September 30, 2025, 06:30:05",
+      "agents": {}
+    },
+    {
+      "step": 362,
+      "simTime": "September 30, 2025, 06:30:10",
+      "agents": {}
+    },
+    {
+      "step": 363,
+      "simTime": "September 30, 2025, 06:30:15",
+      "agents": {}
+    },
+    {
+      "step": 364,
+      "simTime": "September 30, 2025, 06:30:20",
+      "agents": {}
+    },
+    {
+      "step": 365,
+      "simTime": "September 30, 2025, 06:30:25",
+      "agents": {}
+    },
+    {
+      "step": 366,
+      "simTime": "September 30, 2025, 06:30:30",
+      "agents": {}
+    },
+    {
+      "step": 367,
+      "simTime": "September 30, 2025, 06:30:35",
+      "agents": {}
+    },
+    {
+      "step": 368,
+      "simTime": "September 30, 2025, 06:30:40",
+      "agents": {}
+    },
+    {
+      "step": 369,
+      "simTime": "September 30, 2025, 06:30:45",
+      "agents": {}
+    },
+    {
+      "step": 370,
+      "simTime": "September 30, 2025, 06:30:50",
+      "agents": {}
+    },
+    {
+      "step": 371,
+      "simTime": "September 30, 2025, 06:30:55",
+      "agents": {}
+    },
+    {
+      "step": 372,
+      "simTime": "September 30, 2025, 06:31:00",
+      "agents": {}
+    },
+    {
+      "step": 373,
+      "simTime": "September 30, 2025, 06:31:05",
+      "agents": {}
+    },
+    {
+      "step": 374,
+      "simTime": "September 30, 2025, 06:31:10",
+      "agents": {}
+    },
+    {
+      "step": 375,
+      "simTime": "September 30, 2025, 06:31:15",
+      "agents": {}
+    },
+    {
+      "step": 376,
+      "simTime": "September 30, 2025, 06:31:20",
+      "agents": {}
+    },
+    {
+      "step": 377,
+      "simTime": "September 30, 2025, 06:31:25",
+      "agents": {}
+    },
+    {
+      "step": 378,
+      "simTime": "September 30, 2025, 06:31:30",
+      "agents": {}
+    },
+    {
+      "step": 379,
+      "simTime": "September 30, 2025, 06:31:35",
+      "agents": {}
+    },
+    {
+      "step": 380,
+      "simTime": "September 30, 2025, 06:31:40",
+      "agents": {}
+    },
+    {
+      "step": 381,
+      "simTime": "September 30, 2025, 06:31:45",
+      "agents": {}
+    },
+    {
+      "step": 382,
+      "simTime": "September 30, 2025, 06:31:50",
+      "agents": {}
+    },
+    {
+      "step": 383,
+      "simTime": "September 30, 2025, 06:31:55",
+      "agents": {}
+    },
+    {
+      "step": 384,
+      "simTime": "September 30, 2025, 06:32:00",
+      "agents": {}
+    },
+    {
+      "step": 385,
+      "simTime": "September 30, 2025, 06:32:05",
+      "agents": {}
+    },
+    {
+      "step": 386,
+      "simTime": "September 30, 2025, 06:32:10",
+      "agents": {}
+    },
+    {
+      "step": 387,
+      "simTime": "September 30, 2025, 06:32:15",
+      "agents": {}
+    },
+    {
+      "step": 388,
+      "simTime": "September 30, 2025, 06:32:20",
+      "agents": {}
+    },
+    {
+      "step": 389,
+      "simTime": "September 30, 2025, 06:32:25",
+      "agents": {}
+    },
+    {
+      "step": 390,
+      "simTime": "September 30, 2025, 06:32:30",
+      "agents": {}
+    },
+    {
+      "step": 391,
+      "simTime": "September 30, 2025, 06:32:35",
+      "agents": {}
+    },
+    {
+      "step": 392,
+      "simTime": "September 30, 2025, 06:32:40",
+      "agents": {}
+    },
+    {
+      "step": 393,
+      "simTime": "September 30, 2025, 06:32:45",
+      "agents": {}
+    },
+    {
+      "step": 394,
+      "simTime": "September 30, 2025, 06:32:50",
+      "agents": {}
+    },
+    {
+      "step": 395,
+      "simTime": "September 30, 2025, 06:32:55",
+      "agents": {}
+    },
+    {
+      "step": 396,
+      "simTime": "September 30, 2025, 06:33:00",
+      "agents": {}
+    },
+    {
+      "step": 397,
+      "simTime": "September 30, 2025, 06:33:05",
+      "agents": {}
+    },
+    {
+      "step": 398,
+      "simTime": "September 30, 2025, 06:33:10",
+      "agents": {}
+    },
+    {
+      "step": 399,
+      "simTime": "September 30, 2025, 06:33:15",
+      "agents": {}
+    },
+    {
+      "step": 400,
+      "simTime": "September 30, 2025, 06:33:20",
+      "agents": {}
+    },
+    {
+      "step": 401,
+      "simTime": "September 30, 2025, 06:33:25",
+      "agents": {}
+    },
+    {
+      "step": 402,
+      "simTime": "September 30, 2025, 06:33:30",
+      "agents": {}
+    },
+    {
+      "step": 403,
+      "simTime": "September 30, 2025, 06:33:35",
+      "agents": {}
+    },
+    {
+      "step": 404,
+      "simTime": "September 30, 2025, 06:33:40",
+      "agents": {}
+    },
+    {
+      "step": 405,
+      "simTime": "September 30, 2025, 06:33:45",
+      "agents": {}
+    },
+    {
+      "step": 406,
+      "simTime": "September 30, 2025, 06:33:50",
+      "agents": {}
+    },
+    {
+      "step": 407,
+      "simTime": "September 30, 2025, 06:33:55",
+      "agents": {}
+    },
+    {
+      "step": 408,
+      "simTime": "September 30, 2025, 06:34:00",
+      "agents": {}
+    },
+    {
+      "step": 409,
+      "simTime": "September 30, 2025, 06:34:05",
+      "agents": {
+        "Doctor 1": {
+          "x": 27,
+          "y": 11,
+          "pronunciatio": "⏳",
+          "description": "conversing about <fill in> an emergency medical assessment between Doctor 1 and a patient who was hit by a car, is bleeding heavily, and reports widespread pain and inability to speak @ ed map:emergency department:minor injuries zone:bed:27:11"
+        }
+      }
+    },
+    {
+      "step": 410,
+      "simTime": "September 30, 2025, 06:34:10",
+      "agents": {
+        "Doctor 1": {
+          "x": 27,
+          "y": 11,
+          "pronunciatio": "⏳",
+          "description": "conversing about <fill in> an emergency medical assessment between Doctor 1 and a patient who was hit by a car, is bleeding heavily, and reports widespread pain and inability to speak @ <waiting> 27 11"
+        }
+      }
+    },
+    {
+      "step": 411,
+      "simTime": "September 30, 2025, 06:34:15",
+      "agents": {}
+    },
+    {
+      "step": 412,
+      "simTime": "September 30, 2025, 06:34:20",
+      "agents": {}
+    },
+    {
+      "step": 413,
+      "simTime": "September 30, 2025, 06:34:25",
+      "agents": {}
+    },
+    {
+      "step": 414,
+      "simTime": "September 30, 2025, 06:34:30",
+      "agents": {}
+    },
+    {
+      "step": 415,
+      "simTime": "September 30, 2025, 06:34:35",
+      "agents": {}
+    },
+    {
+      "step": 416,
+      "simTime": "September 30, 2025, 06:34:40",
+      "agents": {}
+    },
+    {
+      "step": 417,
+      "simTime": "September 30, 2025, 06:34:45",
+      "agents": {}
+    },
+    {
+      "step": 418,
+      "simTime": "September 30, 2025, 06:34:50",
+      "agents": {}
+    },
+    {
+      "step": 419,
+      "simTime": "September 30, 2025, 06:34:55",
+      "agents": {}
+    },
+    {
+      "step": 420,
+      "simTime": "September 30, 2025, 06:35:00",
+      "agents": {}
+    },
+    {
+      "step": 421,
+      "simTime": "September 30, 2025, 06:35:05",
+      "agents": {}
+    },
+    {
+      "step": 422,
+      "simTime": "September 30, 2025, 06:35:10",
+      "agents": {}
+    },
+    {
+      "step": 423,
+      "simTime": "September 30, 2025, 06:35:15",
+      "agents": {}
+    },
+    {
+      "step": 424,
+      "simTime": "September 30, 2025, 06:35:20",
+      "agents": {}
+    },
+    {
+      "step": 425,
+      "simTime": "September 30, 2025, 06:35:25",
+      "agents": {}
+    },
+    {
+      "step": 426,
+      "simTime": "September 30, 2025, 06:35:30",
+      "agents": {}
+    },
+    {
+      "step": 427,
+      "simTime": "September 30, 2025, 06:35:35",
+      "agents": {}
+    },
+    {
+      "step": 428,
+      "simTime": "September 30, 2025, 06:35:40",
+      "agents": {}
+    },
+    {
+      "step": 429,
+      "simTime": "September 30, 2025, 06:35:45",
+      "agents": {}
+    },
+    {
+      "step": 430,
+      "simTime": "September 30, 2025, 06:35:50",
+      "agents": {}
+    },
+    {
+      "step": 431,
+      "simTime": "September 30, 2025, 06:35:55",
+      "agents": {}
+    },
+    {
+      "step": 432,
+      "simTime": "September 30, 2025, 06:36:00",
+      "agents": {}
+    },
+    {
+      "step": 433,
+      "simTime": "September 30, 2025, 06:36:05",
+      "agents": {}
+    },
+    {
+      "step": 434,
+      "simTime": "September 30, 2025, 06:36:10",
+      "agents": {}
+    },
+    {
+      "step": 435,
+      "simTime": "September 30, 2025, 06:36:15",
+      "agents": {}
+    },
+    {
+      "step": 436,
+      "simTime": "September 30, 2025, 06:36:20",
+      "agents": {}
+    },
+    {
+      "step": 437,
+      "simTime": "September 30, 2025, 06:36:25",
+      "agents": {}
+    },
+    {
+      "step": 438,
+      "simTime": "September 30, 2025, 06:36:30",
+      "agents": {}
+    },
+    {
+      "step": 439,
+      "simTime": "September 30, 2025, 06:36:35",
+      "agents": {}
+    },
+    {
+      "step": 440,
+      "simTime": "September 30, 2025, 06:36:40",
+      "agents": {}
+    },
+    {
+      "step": 441,
+      "simTime": "September 30, 2025, 06:36:45",
+      "agents": {}
+    },
+    {
+      "step": 442,
+      "simTime": "September 30, 2025, 06:36:50",
+      "agents": {}
+    },
+    {
+      "step": 443,
+      "simTime": "September 30, 2025, 06:36:55",
+      "agents": {}
+    },
+    {
+      "step": 444,
+      "simTime": "September 30, 2025, 06:37:00",
+      "agents": {}
+    },
+    {
+      "step": 445,
+      "simTime": "September 30, 2025, 06:37:05",
+      "agents": {}
+    },
+    {
+      "step": 446,
+      "simTime": "September 30, 2025, 06:37:10",
+      "agents": {}
+    },
+    {
+      "step": 447,
+      "simTime": "September 30, 2025, 06:37:15",
+      "agents": {}
+    },
+    {
+      "step": 448,
+      "simTime": "September 30, 2025, 06:37:20",
+      "agents": {}
+    },
+    {
+      "step": 449,
+      "simTime": "September 30, 2025, 06:37:25",
+      "agents": {}
+    },
+    {
+      "step": 450,
+      "simTime": "September 30, 2025, 06:37:30",
+      "agents": {}
+    },
+    {
+      "step": 451,
+      "simTime": "September 30, 2025, 06:37:35",
+      "agents": {}
+    },
+    {
+      "step": 452,
+      "simTime": "September 30, 2025, 06:37:40",
+      "agents": {}
+    },
+    {
+      "step": 453,
+      "simTime": "September 30, 2025, 06:37:45",
+      "agents": {}
+    },
+    {
+      "step": 454,
+      "simTime": "September 30, 2025, 06:37:50",
+      "agents": {}
+    },
+    {
+      "step": 455,
+      "simTime": "September 30, 2025, 06:37:55",
+      "agents": {}
+    },
+    {
+      "step": 456,
+      "simTime": "September 30, 2025, 06:38:00",
+      "agents": {}
+    },
+    {
+      "step": 457,
+      "simTime": "September 30, 2025, 06:38:05",
+      "agents": {}
+    },
+    {
+      "step": 458,
+      "simTime": "September 30, 2025, 06:38:10",
+      "agents": {}
+    },
+    {
+      "step": 459,
+      "simTime": "September 30, 2025, 06:38:15",
+      "agents": {}
+    },
+    {
+      "step": 460,
+      "simTime": "September 30, 2025, 06:38:20",
+      "agents": {}
+    },
+    {
+      "step": 461,
+      "simTime": "September 30, 2025, 06:38:25",
+      "agents": {}
+    },
+    {
+      "step": 462,
+      "simTime": "September 30, 2025, 06:38:30",
+      "agents": {}
+    },
+    {
+      "step": 463,
+      "simTime": "September 30, 2025, 06:38:35",
+      "agents": {}
+    },
+    {
+      "step": 464,
+      "simTime": "September 30, 2025, 06:38:40",
+      "agents": {}
+    },
+    {
+      "step": 465,
+      "simTime": "September 30, 2025, 06:38:45",
+      "agents": {}
+    },
+    {
+      "step": 466,
+      "simTime": "September 30, 2025, 06:38:50",
+      "agents": {}
+    },
+    {
+      "step": 467,
+      "simTime": "September 30, 2025, 06:38:55",
+      "agents": {}
+    },
+    {
+      "step": 468,
+      "simTime": "September 30, 2025, 06:39:00",
+      "agents": {}
+    },
+    {
+      "step": 469,
+      "simTime": "September 30, 2025, 06:39:05",
+      "agents": {}
+    },
+    {
+      "step": 470,
+      "simTime": "September 30, 2025, 06:39:10",
+      "agents": {}
+    },
+    {
+      "step": 471,
+      "simTime": "September 30, 2025, 06:39:15",
+      "agents": {}
+    },
+    {
+      "step": 472,
+      "simTime": "September 30, 2025, 06:39:20",
+      "agents": {}
+    },
+    {
+      "step": 473,
+      "simTime": "September 30, 2025, 06:39:25",
+      "agents": {}
+    },
+    {
+      "step": 474,
+      "simTime": "September 30, 2025, 06:39:30",
+      "agents": {}
+    },
+    {
+      "step": 475,
+      "simTime": "September 30, 2025, 06:39:35",
+      "agents": {}
+    },
+    {
+      "step": 476,
+      "simTime": "September 30, 2025, 06:39:40",
+      "agents": {}
+    },
+    {
+      "step": 477,
+      "simTime": "September 30, 2025, 06:39:45",
+      "agents": {}
+    },
+    {
+      "step": 478,
+      "simTime": "September 30, 2025, 06:39:50",
+      "agents": {}
+    },
+    {
+      "step": 479,
+      "simTime": "September 30, 2025, 06:39:55",
+      "agents": {}
+    },
+    {
+      "step": 480,
+      "simTime": "September 30, 2025, 06:40:00",
+      "agents": {}
+    },
+    {
+      "step": 481,
+      "simTime": "September 30, 2025, 06:40:05",
+      "agents": {}
+    },
+    {
+      "step": 482,
+      "simTime": "September 30, 2025, 06:40:10",
+      "agents": {}
+    },
+    {
+      "step": 483,
+      "simTime": "September 30, 2025, 06:40:15",
+      "agents": {}
+    },
+    {
+      "step": 484,
+      "simTime": "September 30, 2025, 06:40:20",
+      "agents": {}
+    },
+    {
+      "step": 485,
+      "simTime": "September 30, 2025, 06:40:25",
+      "agents": {}
+    },
+    {
+      "step": 486,
+      "simTime": "September 30, 2025, 06:40:30",
+      "agents": {}
+    },
+    {
+      "step": 487,
+      "simTime": "September 30, 2025, 06:40:35",
+      "agents": {}
+    },
+    {
+      "step": 488,
+      "simTime": "September 30, 2025, 06:40:40",
+      "agents": {}
+    },
+    {
+      "step": 489,
+      "simTime": "September 30, 2025, 06:40:45",
+      "agents": {}
+    },
+    {
+      "step": 490,
+      "simTime": "September 30, 2025, 06:40:50",
+      "agents": {}
+    },
+    {
+      "step": 491,
+      "simTime": "September 30, 2025, 06:40:55",
+      "agents": {}
+    },
+    {
+      "step": 492,
+      "simTime": "September 30, 2025, 06:41:00",
+      "agents": {}
+    },
+    {
+      "step": 493,
+      "simTime": "September 30, 2025, 06:41:05",
+      "agents": {}
+    },
+    {
+      "step": 494,
+      "simTime": "September 30, 2025, 06:41:10",
+      "agents": {}
+    },
+    {
+      "step": 495,
+      "simTime": "September 30, 2025, 06:41:15",
+      "agents": {}
+    },
+    {
+      "step": 496,
+      "simTime": "September 30, 2025, 06:41:20",
+      "agents": {}
+    },
+    {
+      "step": 497,
+      "simTime": "September 30, 2025, 06:41:25",
+      "agents": {}
+    },
+    {
+      "step": 498,
+      "simTime": "September 30, 2025, 06:41:30",
+      "agents": {}
+    },
+    {
+      "step": 499,
+      "simTime": "September 30, 2025, 06:41:35",
+      "agents": {}
+    },
+    {
+      "step": 500,
+      "simTime": "September 30, 2025, 06:41:40",
+      "agents": {}
+    },
+    {
+      "step": 501,
+      "simTime": "September 30, 2025, 06:41:45",
+      "agents": {}
+    },
+    {
+      "step": 502,
+      "simTime": "September 30, 2025, 06:41:50",
+      "agents": {}
+    },
+    {
+      "step": 503,
+      "simTime": "September 30, 2025, 06:41:55",
+      "agents": {}
+    },
+    {
+      "step": 504,
+      "simTime": "September 30, 2025, 06:42:00",
+      "agents": {}
+    },
+    {
+      "step": 505,
+      "simTime": "September 30, 2025, 06:42:05",
+      "agents": {}
+    },
+    {
+      "step": 506,
+      "simTime": "September 30, 2025, 06:42:10",
+      "agents": {}
+    },
+    {
+      "step": 507,
+      "simTime": "September 30, 2025, 06:42:15",
+      "agents": {}
+    },
+    {
+      "step": 508,
+      "simTime": "September 30, 2025, 06:42:20",
+      "agents": {}
+    },
+    {
+      "step": 509,
+      "simTime": "September 30, 2025, 06:42:25",
+      "agents": {}
+    },
+    {
+      "step": 510,
+      "simTime": "September 30, 2025, 06:42:30",
+      "agents": {}
+    },
+    {
+      "step": 511,
+      "simTime": "September 30, 2025, 06:42:35",
+      "agents": {}
+    },
+    {
+      "step": 512,
+      "simTime": "September 30, 2025, 06:42:40",
+      "agents": {}
+    },
+    {
+      "step": 513,
+      "simTime": "September 30, 2025, 06:42:45",
+      "agents": {}
+    },
+    {
+      "step": 514,
+      "simTime": "September 30, 2025, 06:42:50",
+      "agents": {}
+    },
+    {
+      "step": 515,
+      "simTime": "September 30, 2025, 06:42:55",
+      "agents": {}
+    },
+    {
+      "step": 516,
+      "simTime": "September 30, 2025, 06:43:00",
+      "agents": {}
+    },
+    {
+      "step": 517,
+      "simTime": "September 30, 2025, 06:43:05",
+      "agents": {}
+    },
+    {
+      "step": 518,
+      "simTime": "September 30, 2025, 06:43:10",
+      "agents": {}
+    },
+    {
+      "step": 519,
+      "simTime": "September 30, 2025, 06:43:15",
+      "agents": {}
+    },
+    {
+      "step": 520,
+      "simTime": "September 30, 2025, 06:43:20",
+      "agents": {}
+    },
+    {
+      "step": 521,
+      "simTime": "September 30, 2025, 06:43:25",
+      "agents": {}
+    },
+    {
+      "step": 522,
+      "simTime": "September 30, 2025, 06:43:30",
+      "agents": {}
+    },
+    {
+      "step": 523,
+      "simTime": "September 30, 2025, 06:43:35",
+      "agents": {}
+    },
+    {
+      "step": 524,
+      "simTime": "September 30, 2025, 06:43:40",
+      "agents": {}
+    },
+    {
+      "step": 525,
+      "simTime": "September 30, 2025, 06:43:45",
+      "agents": {}
+    },
+    {
+      "step": 526,
+      "simTime": "September 30, 2025, 06:43:50",
+      "agents": {}
+    },
+    {
+      "step": 527,
+      "simTime": "September 30, 2025, 06:43:55",
+      "agents": {}
+    },
+    {
+      "step": 528,
+      "simTime": "September 30, 2025, 06:44:00",
+      "agents": {}
+    },
+    {
+      "step": 529,
+      "simTime": "September 30, 2025, 06:44:05",
+      "agents": {}
+    },
+    {
+      "step": 530,
+      "simTime": "September 30, 2025, 06:44:10",
+      "agents": {}
+    },
+    {
+      "step": 531,
+      "simTime": "September 30, 2025, 06:44:15",
+      "agents": {}
+    },
+    {
+      "step": 532,
+      "simTime": "September 30, 2025, 06:44:20",
+      "agents": {}
+    },
+    {
+      "step": 533,
+      "simTime": "September 30, 2025, 06:44:25",
+      "agents": {}
+    },
+    {
+      "step": 534,
+      "simTime": "September 30, 2025, 06:44:30",
+      "agents": {}
+    },
+    {
+      "step": 535,
+      "simTime": "September 30, 2025, 06:44:35",
+      "agents": {}
+    },
+    {
+      "step": 536,
+      "simTime": "September 30, 2025, 06:44:40",
+      "agents": {}
+    },
+    {
+      "step": 537,
+      "simTime": "September 30, 2025, 06:44:45",
+      "agents": {}
+    },
+    {
+      "step": 538,
+      "simTime": "September 30, 2025, 06:44:50",
+      "agents": {}
+    },
+    {
+      "step": 539,
+      "simTime": "September 30, 2025, 06:44:55",
+      "agents": {}
+    },
+    {
+      "step": 540,
+      "simTime": "September 30, 2025, 06:45:00",
+      "agents": {}
+    },
+    {
+      "step": 541,
+      "simTime": "September 30, 2025, 06:45:05",
+      "agents": {}
+    },
+    {
+      "step": 542,
+      "simTime": "September 30, 2025, 06:45:10",
+      "agents": {}
+    },
+    {
+      "step": 543,
+      "simTime": "September 30, 2025, 06:45:15",
+      "agents": {}
+    },
+    {
+      "step": 544,
+      "simTime": "September 30, 2025, 06:45:20",
+      "agents": {}
+    },
+    {
+      "step": 545,
+      "simTime": "September 30, 2025, 06:45:25",
+      "agents": {}
+    },
+    {
+      "step": 546,
+      "simTime": "September 30, 2025, 06:45:30",
+      "agents": {}
+    },
+    {
+      "step": 547,
+      "simTime": "September 30, 2025, 06:45:35",
+      "agents": {}
+    },
+    {
+      "step": 548,
+      "simTime": "September 30, 2025, 06:45:40",
+      "agents": {}
+    },
+    {
+      "step": 549,
+      "simTime": "September 30, 2025, 06:45:45",
+      "agents": {}
+    },
+    {
+      "step": 550,
+      "simTime": "September 30, 2025, 06:45:50",
+      "agents": {}
+    },
+    {
+      "step": 551,
+      "simTime": "September 30, 2025, 06:45:55",
+      "agents": {}
+    },
+    {
+      "step": 552,
+      "simTime": "September 30, 2025, 06:46:00",
+      "agents": {}
+    },
+    {
+      "step": 553,
+      "simTime": "September 30, 2025, 06:46:05",
+      "agents": {}
+    },
+    {
+      "step": 554,
+      "simTime": "September 30, 2025, 06:46:10",
+      "agents": {}
+    },
+    {
+      "step": 555,
+      "simTime": "September 30, 2025, 06:46:15",
+      "agents": {}
+    },
+    {
+      "step": 556,
+      "simTime": "September 30, 2025, 06:46:20",
+      "agents": {}
+    },
+    {
+      "step": 557,
+      "simTime": "September 30, 2025, 06:46:25",
+      "agents": {}
+    },
+    {
+      "step": 558,
+      "simTime": "September 30, 2025, 06:46:30",
+      "agents": {}
+    },
+    {
+      "step": 559,
+      "simTime": "September 30, 2025, 06:46:35",
+      "agents": {}
+    },
+    {
+      "step": 560,
+      "simTime": "September 30, 2025, 06:46:40",
+      "agents": {}
+    },
+    {
+      "step": 561,
+      "simTime": "September 30, 2025, 06:46:45",
+      "agents": {}
+    },
+    {
+      "step": 562,
+      "simTime": "September 30, 2025, 06:46:50",
+      "agents": {}
+    },
+    {
+      "step": 563,
+      "simTime": "September 30, 2025, 06:46:55",
+      "agents": {}
+    },
+    {
+      "step": 564,
+      "simTime": "September 30, 2025, 06:47:00",
+      "agents": {}
+    },
+    {
+      "step": 565,
+      "simTime": "September 30, 2025, 06:47:05",
+      "agents": {}
+    },
+    {
+      "step": 566,
+      "simTime": "September 30, 2025, 06:47:10",
+      "agents": {}
+    },
+    {
+      "step": 567,
+      "simTime": "September 30, 2025, 06:47:15",
+      "agents": {}
+    },
+    {
+      "step": 568,
+      "simTime": "September 30, 2025, 06:47:20",
+      "agents": {}
+    },
+    {
+      "step": 569,
+      "simTime": "September 30, 2025, 06:47:25",
+      "agents": {}
+    },
+    {
+      "step": 570,
+      "simTime": "September 30, 2025, 06:47:30",
+      "agents": {}
+    },
+    {
+      "step": 571,
+      "simTime": "September 30, 2025, 06:47:35",
+      "agents": {}
+    },
+    {
+      "step": 572,
+      "simTime": "September 30, 2025, 06:47:40",
+      "agents": {}
+    },
+    {
+      "step": 573,
+      "simTime": "September 30, 2025, 06:47:45",
+      "agents": {}
+    },
+    {
+      "step": 574,
+      "simTime": "September 30, 2025, 06:47:50",
+      "agents": {}
+    },
+    {
+      "step": 575,
+      "simTime": "September 30, 2025, 06:47:55",
+      "agents": {}
+    },
+    {
+      "step": 576,
+      "simTime": "September 30, 2025, 06:48:00",
+      "agents": {}
+    },
+    {
+      "step": 577,
+      "simTime": "September 30, 2025, 06:48:05",
+      "agents": {}
+    },
+    {
+      "step": 578,
+      "simTime": "September 30, 2025, 06:48:10",
+      "agents": {}
+    },
+    {
+      "step": 579,
+      "simTime": "September 30, 2025, 06:48:15",
+      "agents": {}
+    },
+    {
+      "step": 580,
+      "simTime": "September 30, 2025, 06:48:20",
+      "agents": {}
+    },
+    {
+      "step": 581,
+      "simTime": "September 30, 2025, 06:48:25",
+      "agents": {}
+    },
+    {
+      "step": 582,
+      "simTime": "September 30, 2025, 06:48:30",
+      "agents": {}
+    },
+    {
+      "step": 583,
+      "simTime": "September 30, 2025, 06:48:35",
+      "agents": {}
+    },
+    {
+      "step": 584,
+      "simTime": "September 30, 2025, 06:48:40",
+      "agents": {}
+    },
+    {
+      "step": 585,
+      "simTime": "September 30, 2025, 06:48:45",
+      "agents": {}
+    },
+    {
+      "step": 586,
+      "simTime": "September 30, 2025, 06:48:50",
+      "agents": {}
+    },
+    {
+      "step": 587,
+      "simTime": "September 30, 2025, 06:48:55",
+      "agents": {}
+    },
+    {
+      "step": 588,
+      "simTime": "September 30, 2025, 06:49:00",
+      "agents": {}
+    },
+    {
+      "step": 589,
+      "simTime": "September 30, 2025, 06:49:05",
+      "agents": {
+        "Doctor 1": {
+          "x": 27,
+          "y": 9,
+          "pronunciatio": "⏳",
+          "description": "conversing about <fill in> an emergency medical assessment between Doctor 1 and a patient who was hit by a car, is bleeding heavily, and reports widespread pain and inability to speak @ ed map:emergency department:minor injuries zone:bed:27:9"
+        }
+      }
+    },
+    {
+      "step": 590,
+      "simTime": "September 30, 2025, 06:49:10",
+      "agents": {
+        "Doctor 1": {
+          "x": 27,
+          "y": 9,
+          "pronunciatio": "⏳",
+          "description": "conversing about <fill in> an emergency medical assessment between Doctor 1 and a patient who was hit by a car, is bleeding heavily, and reports widespread pain and inability to speak @ <waiting> 27 9"
+        }
+      }
+    },
+    {
+      "step": 591,
+      "simTime": "September 30, 2025, 06:49:15",
+      "agents": {}
+    },
+    {
+      "step": 592,
+      "simTime": "September 30, 2025, 06:49:20",
+      "agents": {}
+    },
+    {
+      "step": 593,
+      "simTime": "September 30, 2025, 06:49:25",
+      "agents": {}
+    },
+    {
+      "step": 594,
+      "simTime": "September 30, 2025, 06:49:30",
+      "agents": {}
+    },
+    {
+      "step": 595,
+      "simTime": "September 30, 2025, 06:49:35",
+      "agents": {}
+    },
+    {
+      "step": 596,
+      "simTime": "September 30, 2025, 06:49:40",
+      "agents": {}
+    },
+    {
+      "step": 597,
+      "simTime": "September 30, 2025, 06:49:45",
+      "agents": {}
+    },
+    {
+      "step": 598,
+      "simTime": "September 30, 2025, 06:49:50",
+      "agents": {}
+    },
+    {
+      "step": 599,
+      "simTime": "September 30, 2025, 06:49:55",
+      "agents": {}
+    }
+  ]
+}

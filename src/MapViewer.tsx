@@ -117,6 +117,30 @@ export function MapViewer() {
       onLoaded={setReplay}
       onError={(e) => setReplayError(String(e))}
     />
+    <button
+      data-testid="load-demo-replay"
+      onClick={() =>
+        loadReplayFromUrl("/replays/small_ed_demo.json")
+          .then(setReplay)
+          .catch((e) => setReplayError(String(e)))
+      }
+      style={{
+        position: "fixed",
+        top: 16,
+        left: 16,
+        padding: "8px 12px",
+        background: "rgba(45,108,223,0.85)",
+        color: "white",
+        border: "none",
+        borderRadius: 6,
+        cursor: "pointer",
+        fontFamily: "monospace",
+        fontSize: 13,
+        zIndex: 20,
+      }}
+    >
+      Load demo replay
+    </button>
     <div
       className={`map-viewer-root${isSidebarOpen ? ' sidebar-open' : ''}`}
       data-testid="map-viewer"
