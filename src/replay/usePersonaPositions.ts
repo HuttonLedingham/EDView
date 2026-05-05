@@ -13,27 +13,20 @@ export interface PersonaState {
   finalState?: ReplayPersonaFinalState;
 }
 
-// Avatars float above most furniture but stay visually grounded. With the
-// capsule (radius 0.25, length 0.55) used in AgentMesh, FLOATING_Y=1.3 puts
-// the capsule center at 1.3 and its bottom at 0.775 — clearly above beds
-// (0.80) and chairs (0.78) for the common case, slightly intersecting the
-// rare tall equipment (diagnostic table 0.98, medical equipment 1.15) which
-// is acceptable because the head still floats well above.
-const FLOATING_Y = 1.3;
+// Avatars sit at world-Y FLOATING_Y (capsule center). With the AgentMesh
+// capsule (radius 0.25, length 0.55, total height 1.05), the bottom is at
+// FLOATING_Y - 0.525 and top at FLOATING_Y + 0.525. At 1.1 the bottom dips
+// into beds/chairs but the upper half (Y ≈ 1.1–1.625) clearly floats above
+// the tallest furniture (medical equipment at 1.15) so the head/shoulders
+// stay visible.
+const FLOATING_Y = 1.1;
 
-// Deterministic XZ jitter per persona id so co-located avatars (e.g.
-// doctor + nurse + patient sharing a trauma-room tile) fan out into 8
-// fixed sub-tile slots instead of stacking on top of each other. The same
-// persona always picks the same direction, so motion lerps cleanly.
-const JITTER_RADIUS = 0.18;
-function jitterFromId(id: string): [number, number] {
-  let h = 0;
-  for (let i = 0; i < id.length; i++) {
-    h = ((h * 31) + id.charCodeAt(i)) >>> 0;
-  }
-  const angle = (h % 8) * (Math.PI / 4);
-  return [Math.cos(angle) * JITTER_RADIUS, Math.sin(angle) * JITTER_RADIUS];
-}
+// When N personas share a source tile, fan them out around the tile center
+// in a small ring so they don't visually stack into a single capsule. Each
+// persona's slot is determined by sorting the tile's persona ids — so the
+// assignment is deterministic per frame and same-tile avatars always get
+// distinct slots regardless of count.
+const FAN_RADIUS = 0.22;
 
 export function usePersonaPositions(args: {
   expanded: ExpandedFrame[];
@@ -52,6 +45,18 @@ export function usePersonaPositions(args: {
     const next = args.expanded[Math.min(args.currentStep + 1, args.expanded.length - 1)];
     if (!cur) return {};
 
+    // Group personas by their integer source tile. Within each tile, sort
+    // ids alphabetically and assign each persona a slot index — that way
+    // co-located avatars always fan out into distinct positions in a ring.
+    const tileGroups = new Map<string, string[]>();
+    for (const [id, delta] of Object.entries(cur.agents)) {
+      const key = `${delta.x ?? 0},${delta.y ?? 0}`;
+      const group = tileGroups.get(key);
+      if (group) group.push(id);
+      else tileGroups.set(key, [id]);
+    }
+    for (const group of tileGroups.values()) group.sort();
+
     const out: Record<string, PersonaState> = {};
     for (const [id, delta] of Object.entries(cur.agents)) {
       const meta = personaIndex.get(id);
@@ -66,13 +71,23 @@ export function usePersonaPositions(args: {
       const lerpX = fromX + (toX - fromX) * args.interpAlpha;
       const lerpY = fromY + (toY - fromY) * args.interpAlpha;
 
-      const [jx, jz] = jitterFromId(id);
+      // Per-tile fan-out: 1 persona → centered; 2+ → evenly spaced ring.
+      const tileKey = `${fromX},${fromY}`;
+      const group = tileGroups.get(tileKey)!;
+      let dx = 0;
+      let dz = 0;
+      if (group.length > 1) {
+        const slotIdx = group.indexOf(id);
+        const angle = (slotIdx / group.length) * Math.PI * 2;
+        dx = Math.cos(angle) * FAN_RADIUS;
+        dz = Math.sin(angle) * FAN_RADIUS;
+      }
 
       out[id] = {
         id,
         role,
-        worldX: lerpX + 0.5 + jx,
-        worldZ: lerpY + 0.5 + jz,
+        worldX: lerpX + 0.5 + dx,
+        worldZ: lerpY + 0.5 + dz,
         worldY: FLOATING_Y,
         pronunciatio: delta.pronunciatio ?? null,
         description: delta.description ?? null,
