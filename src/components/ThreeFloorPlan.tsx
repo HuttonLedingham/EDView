@@ -29,7 +29,8 @@ import { TextureLoader } from 'three';
 import { FBXLoader } from 'three/examples/jsm/loaders/FBXLoader.js';
 import { Text } from 'troika-three-text';
 import type { MapLayout, EquipmentPlacement, ZoneRegion } from '@/parser/types';
-import type { PersonaState } from '@/hooks/usePersonaController';
+import type { PersonaState } from '@/replay/usePersonaPositions';
+import { AgentLayer } from './AgentLayer';
 import { CANVAS_BACKGROUND_COLOR } from '@/theme/colors';
 import { start } from 'repl';
 
@@ -694,11 +695,13 @@ function ZoneLabels({ layout, showZoneLabels }: { layout: MapLayout; showZoneLab
 function Scene({
   layout,
   controlsRef,
-  showZoneLabels
+  showZoneLabels,
+  personas,
 }: {
   layout: MapLayout;
   controlsRef: React.RefObject<OrbitControlsImpl | null>;
   showZoneLabels?: boolean;
+  personas?: Record<string, PersonaState>;
 }) {
   const cx = layout.widthInTiles / 2;
   const cz = layout.heightInTiles / 2;
@@ -715,6 +718,7 @@ function Scene({
       <Furniture layout={layout} />
       <ReceptionDecorations layout={layout} />
       <ZoneLabels layout={layout} showZoneLabels={showZoneLabels} />
+      {personas && <AgentLayer personas={personas} />}
       <OrbitControls
         ref={controlsRef as React.RefObject<OrbitControlsImpl>}
         target={[cx, 0, cz]}
@@ -896,7 +900,7 @@ function NavControls({ controlsRef, cameraRef, layout }: NavControlsProps) {
  * Takes the same `MapLayout` the parser produces and renders a real
  * 3D scene with Google Maps-style navigation controls.
  */
-export function ThreeFloorPlan({ layout, showZoneLabels }: ThreeFloorPlanProps) {
+export function ThreeFloorPlan({ layout, showZoneLabels, personas }: ThreeFloorPlanProps) {
   const mapDiag = Math.max(layout.widthInTiles, layout.heightInTiles);
   const controlsRef = useRef<OrbitControlsImpl | null>(null);
   const cameraRef = useRef<THREE.Camera | null>(null);
@@ -921,7 +925,7 @@ export function ThreeFloorPlan({ layout, showZoneLabels }: ThreeFloorPlanProps) 
         gl={{ antialias: true, toneMapping: THREE.NoToneMapping }}
       >
         <Suspense fallback={null}>
-          <Scene layout={layout} controlsRef={controlsRef} showZoneLabels={showZoneLabels} />
+          <Scene layout={layout} controlsRef={controlsRef} showZoneLabels={showZoneLabels} personas={personas} />
           <CameraExposer cameraRef={cameraRef} />
         </Suspense>
       </Canvas>
