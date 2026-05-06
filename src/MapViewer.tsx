@@ -121,7 +121,7 @@ export function MapViewer() {
     <button
       data-testid="load-demo-replay"
       onClick={() =>
-        loadReplayFromUrl("/replays/small_ed_demo.json")
+        loadReplayFromUrl(`${import.meta.env.BASE_URL}replays/small_ed_demo.json`)
           .then(setReplay)
           .catch((e) => setReplayError(String(e)))
       }
