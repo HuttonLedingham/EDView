@@ -31,6 +31,7 @@ import { Text } from 'troika-three-text';
 import type { MapLayout, EquipmentPlacement, ZoneRegion } from '@/parser/types';
 import type { PersonaState } from '@/hooks/usePersonaController';
 import { CANVAS_BACKGROUND_COLOR } from '@/theme/colors';
+import { start } from 'repl';
 
 // Extend react-three-fiber with the Text component
 extend({ Text });
@@ -137,7 +138,7 @@ function floorModelForZone(zoneId: string): string {
       return `${base}models/hospital/floor_reception.fbx`;
     case 'hallway':
     case 'exit':
-      return `${base}models/hospital/floor_office.fbx`;
+      return `null`;
     default:
       return `${base}models/hospital/floor_ward.fbx`;
   }
@@ -161,35 +162,62 @@ function ZoneFloor({ zone }: { zone: ZoneRegion }) {
   }, [zone.tilePositions]);
 
   if (!floorModel) return null;
-
   const minX = zone.bounds.minX;
   const minZ = zone.bounds.minY;
   const maxX = zone.bounds.maxX + 1;
   const maxZ = zone.bounds.maxY + 1;
 
-  const tiles: Array<{ x: number; z: number; key: string; offset: number; model: THREE.Object3D }> = [];
+  let offset = 1;
+  if(zone.zoneId === 'waiting_room'){
+      offset = 2; // Slightly raise the floor at the edges of the waiting room to create a subtle border effect
+  }
+  let startZ: number | null = null;
+  console.log(tileSetLookup);
+  const tiles: Array<{ x: number; z: number; key: string; offset: number; model: THREE.Object3D; sizeZ: number }> = [];
   for (let x = minX; x < maxX; x++) {
+    startZ = null;
     for (let z = minZ; z < maxZ; z++) {
-      let offset = 1;
-      let model = floorModel;
-      if(zone.zoneId === 'waiting_room'){
-          offset = 2; // Slightly raise the floor at the edges of the waiting room to create a subtle border effect
+      const hasTile = tileSetLookup.has(`${x},${z}`);
+      if (hasTile) {
+        if(zone.zoneId === 'waiting_room'){
+          const modelClone = floorModel.clone(true);
+          tiles.push({ x, z: z, key: `floor-${zone.zoneRegionId}-${x}-${z}`, offset:offset, model: modelClone, sizeZ: 1});
+        }        
+        else if (startZ === null) {
+        //const modelClone = floorModel.clone(true);)
+          startZ = z;
+        //tiles.push({ x, z, key: `floor-${zone.zoneRegionId}-${x}-${z}`, offset:offset, model: modelClone });
+        }
       }
-      if (tileSetLookup.has(`${x},${z}`)) {
-        tiles.push({ x, z, key: `floor-${zone.zoneRegionId}-${x}-${z}`, offset:offset, model: model });
+      else if (startZ !== null) {
+        console.log(`Adding floor tile at x=${x}, z=${startZ} to ${z - 1} for zone ${zone.zoneId}`);
+        // Handle the case where we're at the end of a contiguous area
+        const modelClone = floorModel.clone(true);
+        const sizeZ = z - startZ;
+        tiles.push({ x, z: startZ, key: `floor-${zone.zoneRegionId}-${x}-${z}`, offset:offset, model: modelClone, sizeZ: sizeZ });
+        startZ = null;
       }
+    }
+    if (startZ !== null) {
+        // Handle the case where we're at the end of a contiguous area
+        const sizeZ = maxZ - startZ;
+
+        const modelClone = floorModel.clone(true);
+        tiles.push({ x, z:(startZ), key: `floor-${zone.zoneRegionId}-${x}-${startZ}`, offset:offset, model: modelClone, sizeZ: sizeZ });
     }
   }
 
   return (
     <>
-      {tiles.map(({ x, z, key, offset,model }) => (
+      {tiles.map(({ x, z, key, offset, model, sizeZ }) => (
         <primitive
           key={key}
-          object={model.clone(true)}
-          position={[x + 0.5, FLOOR_Y, z + 0.5]}
+          object={model}
+          position={[x + 0.5, FLOOR_Y, z  + sizeZ / 2]}
           rotation={[-Math.PI / 2, 0, 0]}
-          scale={[FBX_SCALE/offset, FBX_SCALE/offset, FBX_SCALE]}
+          scale={[FBX_SCALE/offset, sizeZ*FBX_SCALE/offset , FBX_SCALE]}
+          castShadow = {false}
+          receiveShadow={true}
         />
       ))}
     </>
@@ -260,6 +288,7 @@ function Walls({ layout }: { layout: MapLayout }) {
           position={[x, FLOOR_Y, z]}
           rotation={[-Math.PI / 2, 0, rotY]}
           scale={[FBX_SCALE, FBX_SCALE, FBX_SCALE]}
+          castShadow={false}
         />
       ))}
     </>
@@ -271,16 +300,20 @@ function Walls({ layout }: { layout: MapLayout }) {
 /* -------------------------------------------------------------------------- */
 
 function GroundPlane({ layout }: { layout: MapLayout }) {
-  const size = Math.max(layout.widthInTiles, layout.heightInTiles) * 3;
+  const floorModel = useFBXModel(`${base}models/hospital/floor_office.fbx`);
+  const size = Math.max(layout.widthInTiles - 1, layout.heightInTiles - 1);
+  const x = layout.widthInTiles / 2 - 0.5;
+  const z = layout.heightInTiles / 2 - 0.5;
+  if (!floorModel) return null;
+
   return (
-    <mesh
-      position={[layout.widthInTiles / 2, -0.05, layout.heightInTiles / 2]}
+    <primitive
+      object={floorModel.clone(true)}
+      position={[x, -0.05, z]}
       rotation={[-Math.PI / 2, 0, 0]}
+      scale={[FBX_SCALE * (layout.widthInTiles - 1), FBX_SCALE * (layout.heightInTiles - 1), FBX_SCALE]}
       receiveShadow
-    >
-      <planeGeometry args={[size, size]} />
-      <meshStandardMaterial color="#5A6058" roughness={1} metalness={0} />
-    </mesh>
+    />
   );
 }
 
@@ -582,8 +615,8 @@ function Lighting({ layout }: { layout: MapLayout }) {
         intensity={1.8}
         color="#FFFAF0"
         castShadow
-        shadow-mapSize-width={2048}
-        shadow-mapSize-height={2048}
+        shadow-mapSize-width={1024}
+        shadow-mapSize-height={1024}
         shadow-camera-left={-mapDiag}
         shadow-camera-right={mapDiag}
         shadow-camera-top={mapDiag}
