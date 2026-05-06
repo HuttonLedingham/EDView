@@ -220,15 +220,15 @@ describe('extractWallSegments', () => {
     expect(horizontals).toHaveLength(2);
     expect(horizontals).toEqual(
       expect.arrayContaining([
-        { orientation: 'horizontal', x1: 0, y1: 0, x2: 3, y2: 0 },
-        { orientation: 'horizontal', x1: 0, y1: 1, x2: 3, y2: 1 }
+        { orientation: 'horizontal', x1: 0, y1: 0, x2: 3, y2: 0, type: 'wall' },
+        { orientation: 'horizontal', x1: 0, y1: 1, x2: 3, y2: 1, type: 'wall' }
       ])
     );
     expect(verticals).toHaveLength(2);
     expect(verticals).toEqual(
       expect.arrayContaining([
-        { orientation: 'vertical', x1: 0, y1: 0, x2: 0, y2: 1 },
-        { orientation: 'vertical', x1: 3, y1: 0, x2: 3, y2: 1 }
+        { orientation: 'vertical', x1: 0, y1: 0, x2: 0, y2: 1, type: 'wall' },
+        { orientation: 'vertical', x1: 3, y1: 0, x2: 3, y2: 1, type: 'wall' }
       ])
     );
   });
@@ -255,10 +255,10 @@ describe('extractWallSegments', () => {
     expect(segments).toHaveLength(4);
     expect(segments).toEqual(
       expect.arrayContaining([
-        { orientation: 'horizontal', x1: 1, y1: 1, x2: 3, y2: 1 },
-        { orientation: 'horizontal', x1: 1, y1: 3, x2: 3, y2: 3 },
-        { orientation: 'vertical', x1: 1, y1: 1, x2: 1, y2: 3 },
-        { orientation: 'vertical', x1: 3, y1: 1, x2: 3, y2: 3 }
+        { orientation: 'horizontal', x1: 1, y1: 1, x2: 3, y2: 1, type: 'wall' },
+        { orientation: 'horizontal', x1: 1, y1: 3, x2: 3, y2: 3, type: 'wall' },
+        { orientation: 'vertical', x1: 1, y1: 1, x2: 1, y2: 3, type: 'wall' },
+        { orientation: 'vertical', x1: 3, y1: 1, x2: 3, y2: 3, type: 'wall' }
       ])
     );
   });
@@ -352,7 +352,7 @@ describe('parseTiledJSON — small_ed_layout.json fixture', () => {
     // Counts pinned against the canonical small_ed_layout.json. They were
     // verified by hand against the legacy Phaser view; any future change
     // here means either the asset file or the parser regressed.
-    expect(layout.equipment.length).toBe(42);
+    expect(layout.equipment.length).toBe(43);
     const counts: Record<string, number> = {};
     for (const e of layout.equipment) counts[e.type] = (counts[e.type] ?? 0) + 1;
     expect(counts).toEqual({
@@ -362,7 +362,8 @@ describe('parseTiledJSON — small_ed_layout.json fixture', () => {
       chair: 2,
       computer: 2,
       wheelchair: 2,
-      diagnostic_table: 1
+      diagnostic_table: 1,
+      triage_bed: 1
     });
   });
 
@@ -424,7 +425,7 @@ describe('parseTiledJSON — foothills_ed_layout.json fixture', () => {
 
   it('extracts the exact equipment count from the foothills fixture', () => {
     // Pinned against the canonical foothills_ed_layout.json.
-    expect(layout.equipment.length).toBe(219);
+    expect(layout.equipment.length).toBe(221);
   });
 
   it('extracts the exact spawning-slot count from the foothills fixture', () => {
