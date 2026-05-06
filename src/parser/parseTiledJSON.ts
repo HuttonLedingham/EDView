@@ -458,7 +458,6 @@ export function extractEquipment(
       const type = equipmentLookup.get(tileId);
       if (!type) continue;
 
-      console.log(`Found equipment tile at (${x}, ${y}): type=${type}, tileId=${tileId}`);
       const rotationID = tileAt(graphic, x, y);
                        
       if (rotationID > 3000000000) {
@@ -559,7 +558,7 @@ export function extractSpawningLocations(
  * @returns Horizontal and vertical wall segments forming the outer (and
  *          any inner) perimeter of every connected wall region.
  */
-export function extractWallSegments(layer: TiledLayer): WallSegment[] {
+export function extractWallSegments(layer: TiledLayer, arena: TiledLayer): WallSegment[] {
   const isWall = (x: number, y: number): boolean => {
     if (x < 0 || y < 0 || x >= layer.width || y >= layer.height) return false;
     return (layer.data[y * layer.width + x] ?? 0) !== 0;
@@ -570,7 +569,6 @@ export function extractWallSegments(layer: TiledLayer): WallSegment[] {
   // (x, y) to (x+1, y). Vertical edges are the dual.
   const horizontalEdges = new Map<number, Set<number>>();
   const verticalEdges = new Map<number, Set<number>>();
-  const doorways = new Map<number, Set<number>>();
 
   const addHorizontal = (y: number, x: number): void => {
     let bucket = horizontalEdges.get(y);
@@ -629,7 +627,6 @@ export function extractWallSegments(layer: TiledLayer): WallSegment[] {
   }
 
   const segments: WallSegment[] = [];
-
   // Merge consecutive horizontal edges sharing the same y value into runs.
   const sortedYs = Array.from(horizontalEdges.keys()).sort((a, b) => a - b);
   for (const y of sortedYs) {
@@ -637,6 +634,11 @@ export function extractWallSegments(layer: TiledLayer): WallSegment[] {
     let runStart: number | null = null;
     let runEnd = 0;
     for (const x of xs) {
+      let validDecorationSpot = false;
+
+      if (tileAt(arena, x, y) !== 0) {
+        validDecorationSpot = true;
+      }
       if (runStart === null) {
         runStart = x;
         runEnd = x + 1;
@@ -649,7 +651,8 @@ export function extractWallSegments(layer: TiledLayer): WallSegment[] {
           y1: y,
           x2: runEnd,
           y2: y,
-          type: 'wall'
+          type: 'wall',
+          validDecorationSpot: validDecorationSpot
         });
 
         if (x - runEnd === 1) {
@@ -659,13 +662,19 @@ export function extractWallSegments(layer: TiledLayer): WallSegment[] {
             y1: y,
             x2: x,        // Ends where the next wall starts
             y2: y,
-            type: 'doorway'
+            type: 'doorway',
+            validDecorationSpot: false
           });
         }
 
         runStart = x;
         runEnd = x + 1;
       }
+    }
+    let validDecorationSpot = false;
+
+    if (tileAt(arena, runStart, y) !== 0) {
+      validDecorationSpot = true;
     }
     if (runStart !== null) {
       segments.push({
@@ -674,7 +683,9 @@ export function extractWallSegments(layer: TiledLayer): WallSegment[] {
         y1: y,
         x2: runEnd,
         y2: y,
-        type: 'wall'
+        type: 'wall',
+        validDecorationSpot: validDecorationSpot
+
       });
     }
   }
@@ -685,7 +696,13 @@ export function extractWallSegments(layer: TiledLayer): WallSegment[] {
     const ys = Array.from(verticalEdges.get(x)!).sort((a, b) => a - b);
     let runStart: number | null = null;
     let runEnd = 0;
+    
     for (const y of ys) {
+      let validDecorationSpot = false;
+
+      if (tileAt(arena, x, y) !== 0) {
+        validDecorationSpot = true;
+      }
       if (runStart === null) {
         runStart = y;
         runEnd = y + 1;
@@ -698,7 +715,9 @@ export function extractWallSegments(layer: TiledLayer): WallSegment[] {
           y1: runStart,
           x2: x,
           y2: runEnd,
-          type: 'wall'
+          type: 'wall',
+          validDecorationSpot: validDecorationSpot
+
         });
 
 
@@ -709,13 +728,20 @@ export function extractWallSegments(layer: TiledLayer): WallSegment[] {
             y1: runEnd,
             x2: x,        // Ends where the next wall starts
             y2: y,
-            type: 'doorway'
+            type: 'doorway',
+            validDecorationSpot: false
+
           });
         }
 
         runStart = y;
         runEnd = y + 1;
       }
+    }
+    let validDecorationSpot = false;
+
+    if (tileAt(arena, x, runStart) !== 0) {
+      validDecorationSpot = true;
     }
     if (runStart !== null) {
       segments.push({
@@ -724,7 +750,9 @@ export function extractWallSegments(layer: TiledLayer): WallSegment[] {
         y1: runStart,
         x2: x,
         y2: runEnd,
-        type: 'wall'
+        type: 'wall',
+        validDecorationSpot: validDecorationSpot
+
       });
     }
   }
@@ -877,7 +905,7 @@ export function parseTiledJSON(
     zones: extractZoneRegions(arenaLayer, arenaLookup),
     equipment: extractEquipment(objectLayer, equipmentLookup, collisionsLayer, graphicLayer),
     spawningLocations: extractSpawningLocations(spawningLayer, spawningLookup),
-    walls: extractWallSegments(wallsLayer),
+    walls: extractWallSegments(wallsLayer, arenaLayer),
     collisionMask: extractCollisionMask(collisionsLayer)
   };
 }

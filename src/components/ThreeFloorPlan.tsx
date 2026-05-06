@@ -28,12 +28,16 @@ import * as THREE from 'three';
 import { TextureLoader } from 'three';
 import { FBXLoader } from 'three/examples/jsm/loaders/FBXLoader.js';
 import { Text } from 'troika-three-text';
-import type { MapLayout, EquipmentPlacement, ZoneRegion } from '@/parser/types';
+import type { MapLayout, EquipmentPlacement, ZoneRegion, WallDecorationType } from '@/parser/types';
 import type { PersonaState } from '@/replay/usePersonaPositions';
 import { AgentLayer } from './AgentLayer';
 import { CANVAS_BACKGROUND_COLOR } from '@/theme/colors';
 import { start } from 'repl';
-
+import { add } from 'three/tsl';
+import { zoneDisplayName } from '@/parser';
+import { StringController } from 'three/examples/jsm/libs/lil-gui.module.min.js';
+import { seededRandom } from 'three/src/math/MathUtils.js';
+import { clone } from 'three/examples/jsm/utils/SkeletonUtils.js';
 // Extend react-three-fiber with the Text component
 extend({ Text });
 
@@ -155,7 +159,6 @@ function ZoneFloor({ zone }: { zone: ZoneRegion }) {
   const floorUrl = floorModelForZone(zone.zoneId);
   const floorModel = useFBXModel(floorUrl);
 
-  console.log(`Rendering floor for zone ${zone.zoneId} (${zone.zoneName}) with model ${floorUrl}`);
   const tileSetLookup = useMemo(() => {
     const s = new Set<string>();
     for (const t of zone.tilePositions) s.add(`${t.x},${t.y}`);
@@ -173,7 +176,6 @@ function ZoneFloor({ zone }: { zone: ZoneRegion }) {
       offset = 2; // Slightly raise the floor at the edges of the waiting room to create a subtle border effect
   }
   let startZ: number | null = null;
-  console.log(tileSetLookup);
   const tiles: Array<{ x: number; z: number; key: string; offset: number; model: THREE.Object3D; sizeZ: number }> = [];
   for (let x = minX; x < maxX; x++) {
     startZ = null;
@@ -191,7 +193,6 @@ function ZoneFloor({ zone }: { zone: ZoneRegion }) {
         }
       }
       else if (startZ !== null) {
-        console.log(`Adding floor tile at x=${x}, z=${startZ} to ${z - 1} for zone ${zone.zoneId}`);
         // Handle the case where we're at the end of a contiguous area
         const modelClone = floorModel.clone(true);
         const sizeZ = z - startZ;
@@ -248,20 +249,28 @@ function Walls({ layout }: { layout: MapLayout }) {
     z: number;
     rotY: number;
     type: THREE.Group;
+    decoration?: WallDecorationType | null;
   }> = [];
-
+  let decorationSeed = 2; // Seed for wall decoration randomization, incremented for each wall segment
   layout.walls.forEach((wall, i) => {
     if (wall.orientation === 'horizontal') {
       const z = wall.y1;
       const startX = Math.min(wall.x1, wall.x2);
       const endX = Math.max(wall.x1, wall.x2);
+
       for (let x = startX; x < endX; x++) {
+        let decoration: WallDecorationType | null = null;
+        if(wall.validDecorationSpot){ // Avoid placing decorations on the outer walls of the map
+          decoration = addWallDecorations(decorationSeed++);
+        }
+
         wallPlacements.push({
           key: `wall-h-${i}-${x}`,
           x: x + 0.5,
           z,
           rotY: 0,
-          type: wall.type === 'doorway' ? doorModel : wallModel
+          type: wall.type === 'doorway' ? doorModel : wallModel,
+          decoration: decoration
         });
       }
     } else {
@@ -269,32 +278,94 @@ function Walls({ layout }: { layout: MapLayout }) {
       const startZ = Math.min(wall.y1, wall.y2);
       const endZ = Math.max(wall.y1, wall.y2);
       for (let z = startZ; z < endZ; z++) {
+        let decoration: WallDecorationType | null = null;
+        if(wall.validDecorationSpot){ // Avoid placing decorations on the outer walls of the map
+          decoration = addWallDecorations(decorationSeed++);
+        }
         wallPlacements.push({
           key: `wall-v-${i}-${z}`,
           x,
           z: z + 0.5,
           rotY: Math.PI / 2,
-          type: wall.type === 'doorway' ? doorModel : wallModel
+          type: wall.type === 'doorway' ? doorModel : wallModel,
+          decoration: decoration
         });
       }
     }
+
   });
 
   return (
     <>
-      {wallPlacements.map(({ key, x, z, rotY,type }) => (
-        <primitive
-          key={key}
-          object={type.clone(true)}
-          position={[x, FLOOR_Y, z]}
-          rotation={[-Math.PI / 2, 0, rotY]}
-          scale={[FBX_SCALE, FBX_SCALE, FBX_SCALE]}
-          castShadow={false}
-        />
+      {wallPlacements.map(({ key, x, z, rotY,type, decoration }) => (
+        <WallSegment key={key} x={x} z={z} rotY={rotY} type={type} decoration={decoration}/>
       ))}
     </>
   );
 }
+
+function addWallDecorations(seed: number): WallDecorationType {
+  // Implementation for adding wall decorations
+
+  const wallDecorations: Array<WallDecorationType> =  [{modelName: 'cabinet.fbx', yOffset: 0},
+                            {modelName: 'plant.fbx', yOffset: 0}, 
+                            {modelName: 'tv.fbx', yOffset: 1, zOffset: -0.2}  ,
+                            {modelName: 'magazine.fbx', yOffset: 0}]; // Example decorations
+
+  const decorationProbability = 0.5; // 30% chance to add a decoration to a wall
+  if (seededRandom(seed) < decorationProbability) {
+    // Add a decoration to the wall
+    const randomItem = wallDecorations[Math.floor(seededRandom(seed + 1) * wallDecorations.length)];
+    if (randomItem) {
+      let yRotation = 0; 
+      let zOffset = -0.26;
+      const rotationProbability = 0.5; // 50% chance to rotate the decoration
+      if (seededRandom(seed + 2) < rotationProbability) {
+        yRotation = Math.PI; // Rotate 90 degrees
+        zOffset = 0.26; // Adjust zOffset for the rotated position
+      }
+      return {...randomItem,yRotation,zOffset};    
+    }
+  }
+  return {modelName: null}; // Return null if no decoration is added
+}
+
+const WallSegment = ({ key, x, z, rotY, type, decoration }: { key: string; x: number; z: number; rotY: number; type: THREE.Group; decoration?: WallDecorationType }) => {
+  return (
+    <>
+        <group key={`wall-group-${key}`}
+          position={[x, FLOOR_Y, z]}
+          rotation={[-Math.PI / 2, 0, rotY]}>
+          <primitive
+            key={key}
+            object={type.clone(true)}
+            scale={[FBX_SCALE, FBX_SCALE, FBX_SCALE]}
+            castShadow={false}
+          />
+
+           
+            { decoration?.modelName && (
+              <WallDecoration prop={decoration}/>
+            
+          )} 
+        </group>
+    </>
+  );
+}
+
+const WallDecoration = ({ prop }: { prop: WallDecorationType }) => {
+  // The hook is now safely at the top level of this sub-component
+  const model = useFBXModel(`${base}models/hospital/${prop.modelName}`);
+  if (!model) return null;
+  return (
+    <primitive 
+      object={model} 
+      position={[prop.xOffset || 0, prop.zOffset || -0.26, prop.yOffset || 0]} 
+      rotation={[0, 0, prop.yRotation || 0]} 
+      scale={[FBX_SCALE, FBX_SCALE, FBX_SCALE]} 
+    />
+  );
+};
 
 /* -------------------------------------------------------------------------- */
 /* Ground plane (surrounding area)                                            */
@@ -302,7 +373,6 @@ function Walls({ layout }: { layout: MapLayout }) {
 
 function GroundPlane({ layout }: { layout: MapLayout }) {
   const floorModel = useFBXModel(`${base}models/hospital/floor_office.fbx`);
-  const size = Math.max(layout.widthInTiles - 1, layout.heightInTiles - 1);
   const x = layout.widthInTiles / 2 - 0.5;
   const z = layout.heightInTiles / 2 - 0.5;
   if (!floorModel) return null;
@@ -440,7 +510,6 @@ function Furniture({ layout }: { layout: MapLayout }) {
         // Skip types that are handled by ReceptionDecorations
         if (DECORATION_HANDLED_TYPES.has(piece.type)) return null;
         const modelUrl = MODEL_URLS[piece.type];
-        console.log(`Rendering furniture: type=${piece.type}, modelUrl=${modelUrl}`);
         if (!modelUrl) return null;
 
         return (
