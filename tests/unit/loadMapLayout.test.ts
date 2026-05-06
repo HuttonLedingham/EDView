@@ -48,6 +48,13 @@ const TINY_TILED_JSON = {
       width: 1,
       height: 1,
       data: [0]
+    },
+    {
+      name: 'Tile Layer 1',
+      type: 'tilelayer',
+      width: 1,
+      height: 1,
+      data: [0]
     }
   ]
 };

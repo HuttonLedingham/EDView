@@ -31,7 +31,6 @@
  * @packageDocumentation
  */
 
-import { g } from 'node_modules/vitest/dist/chunks/suite.d.udJtyAgw.js';
 import type {
   EquipmentPlacement,
   EquipmentType,
@@ -45,8 +44,6 @@ import type {
   ZoneId,
   ZoneRegion
 } from './types.js';
-import { Grid } from '@react-three/drei';
-import { add } from 'three/tsl';
 
 /* -------------------------------------------------------------------------- */
 /* Layer name constants                                                       */
@@ -445,8 +442,7 @@ function simplifyCollinear(polygon: TilePoint[]): TilePoint[] {
 export function extractEquipment(
   layer: TiledLayer,
   equipmentLookup: Map<number, EquipmentType>,
-  walls: TiledLayer,
-  graphic: TiledLayer
+  graphic?: TiledLayer
 ): EquipmentPlacement[] {
   const out: EquipmentPlacement[] = [];
   for (let y = 0; y < layer.height; y++) {
@@ -458,9 +454,8 @@ export function extractEquipment(
       const type = equipmentLookup.get(tileId);
       if (!type) continue;
 
-      console.log(`Found equipment tile at (${x}, ${y}): type=${type}, tileId=${tileId}`);
-      const rotationID = tileAt(graphic, x, y);
-                       
+      const rotationID = graphic ? tileAt(graphic, x, y) : 0;
+
       if (rotationID > 3000000000) {
         rotation_offset = -Math.PI *2;
       }
@@ -570,7 +565,6 @@ export function extractWallSegments(layer: TiledLayer): WallSegment[] {
   // (x, y) to (x+1, y). Vertical edges are the dual.
   const horizontalEdges = new Map<number, Set<number>>();
   const verticalEdges = new Map<number, Set<number>>();
-  const doorways = new Map<number, Set<number>>();
 
   const addHorizontal = (y: number, x: number): void => {
     let bucket = horizontalEdges.get(y);
@@ -592,39 +586,14 @@ export function extractWallSegments(layer: TiledLayer): WallSegment[] {
   for (let y = 0; y < layer.height; y++) {
     for (let x = 0; x < layer.width; x++) {
       if (!isWall(x, y)) continue;
-      if (!isWall(x + 1, y) && !isWall(x - 1, y )) {
-        addVertical(x, y); // Vertical wall
-      } 
-      else if (isWall(x, y + 1) && isWall(x + 1, y)) {
-        addVertical(x, y); // Vertical wall
-      }
-      else if (isWall(x, y + 1) && isWall(x - 1, y)) {
-        addVertical(x, y); // Vertical wall
-      }
-
-
-      if (isWall(x + 1, y)) {
-        addHorizontal(y, x); // Horizontal wall
-
-      }
-
-      if ( isWall(x - 1, y) && !isWall(x, y + 1) && !isWall(x, y - 1)) {
-        addHorizontal(y, x); 
-      }
-      if (isWall(x, y - 1) && isWall(x + 1, y)) {
-        addHorizontal(y, x); // Left edge
-                //addVertical(x, y);
-
-      }
-
       // Top edge (between this tile and the tile above).
-      //if (!isWall(x, y - 1)) addHorizontal(y, x);
+      if (!isWall(x, y - 1)) addHorizontal(y, x);
       // Bottom edge (between this tile and the tile below).
-      // if (!isWall(x, y + 1)) addHorizontal(y - 1, x);
-      // // Left edge (between this tile and the tile on the left).
-      // if (!isWall(x - 1, y) && isWall(x, y)) addVertical(x + 1, y);
+      if (!isWall(x, y + 1)) addHorizontal(y + 1, x);
+      // Left edge (between this tile and the tile on the left).
+      if (!isWall(x - 1, y)) addVertical(x, y);
       // Right edge (between this tile and the tile on the right).
-      //if (!isWall(x + 1, y)) addVertical(x, y);
+      if (!isWall(x + 1, y)) addVertical(x + 1, y);
     }
   }
 
@@ -733,19 +702,6 @@ export function extractWallSegments(layer: TiledLayer): WallSegment[] {
   return segments;
 }
 
-export function getWallRotation(layer: TiledLayer, x: number, y: number): number {
-  const isWall = (x: number, y: number): boolean => {
-    if (x < 0 || y < 0 || x >= layer.width || y >= layer.height) return false;
-    return (layer.data[y * layer.width + x] ?? 0) !== 0;
-  };
-
-
-  if (isWall(x + 1, y) && isWall(x - 1, y)) {
-    return 0; // Vertical wall
-  } else if (isWall(x, y - 1) && isWall(x, y + 1)) {
-    return 1; // Horizontal wall
-  }
-}
 /* -------------------------------------------------------------------------- */
 /* Collision mask extraction                                                  */
 /* -------------------------------------------------------------------------- */
@@ -875,7 +831,7 @@ export function parseTiledJSON(
     heightInTiles: tiled.height,
     tileSizePx: tiled.tilewidth,
     zones: extractZoneRegions(arenaLayer, arenaLookup),
-    equipment: extractEquipment(objectLayer, equipmentLookup, collisionsLayer, graphicLayer),
+    equipment: extractEquipment(objectLayer, equipmentLookup, graphicLayer),
     spawningLocations: extractSpawningLocations(spawningLayer, spawningLookup),
     walls: extractWallSegments(wallsLayer),
     collisionMask: extractCollisionMask(collisionsLayer)

@@ -58,10 +58,17 @@ export default [
         URLSearchParams: 'readonly',
         HTMLElement: 'readonly',
         HTMLDivElement: 'readonly',
+        HTMLInputElement: 'readonly',
         React: 'readonly',
         Response: 'readonly',
         RequestInfo: 'readonly',
-        process: 'readonly'
+        process: 'readonly',
+        DragEvent: 'readonly',
+        Event: 'readonly',
+        File: 'readonly',
+        FileReader: 'readonly',
+        requestAnimationFrame: 'readonly',
+        cancelAnimationFrame: 'readonly'
       }
     },
     plugins: {
