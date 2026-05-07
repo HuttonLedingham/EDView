@@ -28,3 +28,26 @@ declare module '*.png?url' {
   const url: string;
   export default url;
 }
+
+declare module 'troika-three-text';
+
+declare namespace JSX {
+  interface IntrinsicElements {
+    text: {
+      ref?: unknown;
+      position?: [number, number, number];
+      rotation?: [number, number, number];
+      text?: string;
+      fontSize?: number;
+      color?: string;
+      anchorX?: string | number;
+      anchorY?: string | number;
+      maxWidth?: number;
+      overflowWrap?: string;
+      textAlign?: string;
+      outlineWidth?: number | string;
+      outlineColor?: string;
+      outlineOpacity?: number;
+    };
+  }
+}

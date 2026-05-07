@@ -41,6 +41,9 @@ import { clone } from 'three/examples/jsm/utils/SkeletonUtils.js';
 // Extend react-three-fiber with the Text component
 extend({ Text });
 
+// Extend react-three-fiber with the Text component
+extend({ Text });
+
 /** Props for {@link ThreeFloorPlan}. */
 export interface ThreeFloorPlanProps {
   /** Parsed map layout. */
@@ -159,6 +162,7 @@ function ZoneFloor({ zone }: { zone: ZoneRegion }) {
   const floorUrl = floorModelForZone(zone.zoneId);
   const floorModel = useFBXModel(floorUrl);
 
+  console.log(`Rendering floor for zone ${zone.zoneId} (${zone.zoneName}) with model ${floorUrl}`);
   const tileSetLookup = useMemo(() => {
     const s = new Set<string>();
     for (const t of zone.tilePositions) s.add(`${t.x},${t.y}`);
@@ -510,6 +514,7 @@ function Furniture({ layout }: { layout: MapLayout }) {
         // Skip types that are handled by ReceptionDecorations
         if (DECORATION_HANDLED_TYPES.has(piece.type)) return null;
         const modelUrl = MODEL_URLS[piece.type];
+        console.log(`Rendering furniture: type=${piece.type}, modelUrl=${modelUrl}`);
         if (!modelUrl) return null;
 
         return (
